@@ -33,5 +33,4 @@ class Wrapper:
         query = "UPDATE " + tablename + "SET " + str(x[0]) + " = \'" + y[0] + "\' WHERE " + field + " = \'" + value + "\'"
         
 
-    def testing(self):
-        print('bogo')
+
