@@ -18,11 +18,16 @@ from kivy.core.window import Window
 from kivy.utils import get_color_from_hex
 from kivy.uix.textinput import TextInput
 
+import wrapper
+import sms
+
+db = wrapper.Wrapper()
+
 Window.clearcolor = get_color_from_hex("0066BA")
 
 #root
 class MainScreen(BoxLayout):
-
+    user = ""
     def __init__(self, **kwargs):
         super(MainScreen, self).__init__(**kwargs)
 
@@ -53,10 +58,20 @@ class MainScreen(BoxLayout):
             self.ids.kivy_screen_manager.current = "start_screen"
 
 
-    def confirm(self, *args):
-        #wrapper.insert("Medicines", userID=self.user, medID=args[0], transTime=)
-        self.ids.kivy_screen_manager.current = "barcode_screen"
-        #if wrapper.select().length > 0:
+    def transaction(self, medName):
+        result = db.select('medicine', **{'medName': medName})
+        medID = result[0]['mid']
+        medCount = int(result[0]['count']) - 1
+        
+        db.update('medicine', 'medName', medName, **{'count':medCount})
+        transValues = {'uid':self.user, 'mid':medID, 'datetime':datetime.now(), 'presentCount':medCount}
+        db.insert('medicine', **transValues)
+
+        if medCount <= 5:
+            text = "The medicine " + medName +" is near depletion, please refill."
+            sms.send_msg(text)
+
+        self.popup.dismiss()
 
 
     def pop1(self):
