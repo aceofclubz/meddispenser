@@ -180,19 +180,7 @@ class MainScreen(BoxLayout):
         sound = SoundLoader.load(fname)
         sound.play()
         
-    def mail():
-    gmail_user = 'smartdispenser0@gmail.com'
-    gmail_pwd = 'abcd@12345_678'
-    gmail_send = 'smartdispenser0@gmail.com'
-
-    server = smtplib.SMTP('smtp.gmail.com', 587)
-    server.starttls()
-    server.login(gmail_user, gmail_pwd)
-
-    message = 'Hi!'
-    server.sendmail(gmail_user, gmail_send, message)
-    server.quit()
-
+        
 
 #app object
 class MedicineApp(App):
@@ -211,17 +199,17 @@ class MedicineApp(App):
         return MainScreen()
     
     def mail():
-            gmail_user = 'smartdispenser0@gmail.com'
-            gmail_pwd = 'abcd@12345_678'
-            gmail_send = 'smartdispenser0@gmail.com'
+        gmail_user = 'smartdispenser0@gmail.com'
+        gmail_pwd = 'abcd@12345_678'
+        gmail_send = 'smartdispenser0@gmail.com'
 
-            server = smtplib.SMTP('smtp.gmail.com', 587)
-            server.starttls()
-            server.login(gmail_user, gmail_pwd)
+        server = smtplib.SMTP('smtp.gmail.com', 587)
+        server.starttls()
+        server.login(gmail_user, gmail_pwd)
 
-            message = 'Please be advised to check the status of the database. It can be accesed through local host'
-            server.sendmail(gmail_user, gmail_send, message)
-            server.quit()
+        message = 'Please be advised to check the status of the database. It can be accesed through local host'
+        server.sendmail(gmail_user, gmail_send, message)
+        server.quit()
             
 if __name__== '__main__':
     MedicineApp().run()
