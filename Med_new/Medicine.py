@@ -21,6 +21,10 @@ from kivy.uix.textinput import TextInput
 import wrapper
 import sms
 
+from datetime import datetime
+from threading import Timer
+import smtplib
+
 db = wrapper.Wrapper()
 
 Window.clearcolor = get_color_from_hex("0066BA")
@@ -30,6 +34,7 @@ class MainScreen(BoxLayout):
     user = ""
     def __init__(self, **kwargs):
         super(MainScreen, self).__init__(**kwargs)
+        
 
     def changeScreen(self, next_screen):
 
@@ -174,6 +179,19 @@ class MainScreen(BoxLayout):
         fname = 'Solmux' + ".mp3"
         sound = SoundLoader.load(fname)
         sound.play()
+        
+    def mail():
+    gmail_user = 'smartdispenser0@gmail.com'
+    gmail_pwd = 'abcd@12345_678'
+    gmail_send = 'smartdispenser0@gmail.com'
+
+    server = smtplib.SMTP('smtp.gmail.com', 587)
+    server.starttls()
+    server.login(gmail_user, gmail_pwd)
+
+    message = 'Hi!'
+    server.sendmail(gmail_user, gmail_send, message)
+    server.quit()
 
 
 #app object
@@ -181,12 +199,30 @@ class MedicineApp(App):
 
     def __init__(self, **kwargs):
         super(MedicineApp, self).__init__(**kwargs)
-
+        x=datetime.today()
+        y=x.replace(day=x.day, hour=0, minute=6, second=0, microsecond=0)
+        delta_t=y-x
+        secs=delta_t.seconds+1
+        t = Timer(secs, mail)
+        t.start()
 
     def build(self):
         self.title = 'Smart Medicine Dispenser'
         return MainScreen()
+    
+    def mail():
+            gmail_user = 'smartdispenser0@gmail.com'
+            gmail_pwd = 'abcd@12345_678'
+            gmail_send = 'smartdispenser0@gmail.com'
 
+            server = smtplib.SMTP('smtp.gmail.com', 587)
+            server.starttls()
+            server.login(gmail_user, gmail_pwd)
+
+            message = 'Please be advised to check the status of the database. It can be accesed through local host'
+            server.sendmail(gmail_user, gmail_send, message)
+            server.quit()
+            
 if __name__== '__main__':
     MedicineApp().run()
 
