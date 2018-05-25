@@ -32,10 +32,10 @@ Window.clearcolor = get_color_from_hex("0066BA")
 #root
 class MainScreen(BoxLayout):
     user = ""
+    
     def __init__(self, **kwargs):
         super(MainScreen, self).__init__(**kwargs)
         
-
     def changeScreen(self, next_screen):
 
         if next_screen == "confirm":
