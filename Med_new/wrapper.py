@@ -9,7 +9,7 @@ class Wrapper:
                                               host='localhost',
                                               database='Dispenser')
         self.cnx.autocommit = True
-        self.cursor = self.cnx.cursor(dictionary=True,buffered=True,)
+        self.cursor = self.cnx.cursor(dictionary=True,buffered=True)
 
     def insert(self, tablename, **kwargs):
         x = *kwargs,
@@ -22,15 +22,18 @@ class Wrapper:
     def select(self, tablename, **kwargs):
         x = *kwargs,
         y = *kwargs.values(),
-        query = "SELECT * FROM " + tablename + " WHERE " + str(x[0]) + " = \'" + y[0] + "\'"
+        query = "SELECT * FROM " + tablename + " WHERE " + str(x[0]) + " = \'" + str(y[0]) + "\'"
         print(query)
         self.cursor.execute(query)
         return self.cursor
 
     def update(self, tablename, field, value, **kwargs):
         x = *kwargs,
-        y = *kwargs.value()
-        query = "UPDATE " + tablename + "SET " + str(x[0]) + " = \'" + y[0] + "\' WHERE " + field + " = \'" + value + "\'"
+        y = *kwargs.values(),
+        query = "UPDATE " + tablename + " SET " + str(x[0]) + " = \'" + str(y[0]) + "\' WHERE " + str(field) + " = \'" + str(value) + "\'"
+        print(query)
+        self.cursor.execute(query)
+        return
         
 
 

@@ -1,4 +1,4 @@
-from twilio.rest import TwilioRestClient
+from twilio.rest import Client
 
 def send_msg(text):
 
@@ -7,7 +7,7 @@ def send_msg(text):
 
     twilio_no = "+19202801868"
 
-    client = TwilioRestClient(act_sid, autho_token)
+    client = Client(act_sid, autho_token)
 
     message = client.messages.create(body=text,
                                      from_=twilio_no,

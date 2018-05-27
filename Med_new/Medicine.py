@@ -35,12 +35,12 @@ db = wrapper.Wrapper()
 Window.clearcolor = get_color_from_hex("0066BA")
 
 #root
-class ServoControl"
+class ServoControl:
     def servo_rotate(self, g):
         pi = pigpio.pi()
         pi.set_servo_pulsewidth(g[0], 1300)
         time.sleep(g[1])
-        pi.set_servo_pulsewidth(g, 0)
+        pi.set_servo_pulsewidth(g[0], 0)
         
         pi.stop
 
@@ -49,7 +49,8 @@ class MainScreen(BoxLayout):
     
     def __init__(self, **kwargs):
         super(MainScreen, self).__init__(**kwargs)
-        
+        self.servocontrol = ServoControl()
+
     def changeScreen(self, next_screen):
 
         if next_screen == "confirm":
@@ -74,17 +75,24 @@ class MainScreen(BoxLayout):
             self.ids.kivy_screen_manager.current = "fifth_screen"
 
         if next_screen == "back to main screen":
-            self.ids.kivy_screen_manager.current = "start_screen"
+            self.ids.kivy_screen_manager.current = "barcode_screen"
 
 
     def transaction(self, medName):
         result = db.select('medicine', **{'medName': medName})
-        medID = result[0]['mid']
-        medCount = int(result[0]['count']) - 1
+        x=0
+        for i in result:
+            if x==0:
+                value=i
+                x+=1
+
+        medID = value['mid']
+        medCount = int(value['count']) - 1
         
         db.update('medicine', 'medName', medName, **{'count':medCount})
-        transValues = {'uid':self.user, 'mid':medID, 'datetime':datetime.now(), 'presentCount':medCount}
-        db.insert('medicine', **transValues)
+        self.user='2201200111695U'
+        transValues = {'userID':self.user, 'medID':medID, 'datetime':datetime.now().strftime('%Y-%m-%d %H:%M:%S'), 'presentCount':medCount}
+        db.insert('transaction', **transValues)
         
         if medCount <= 5:
             text = "The medicine " + medName +" is near depletion, please refill."
@@ -122,6 +130,7 @@ class MainScreen(BoxLayout):
         
 
     def dispense(self, g):
+        print(g)
         self.servocontrol.servo_rotate(g)
         self.popup.dismiss()
         self.changeScreen('back to main screen')
@@ -214,17 +223,17 @@ class MedicineApp(App):
     def __init__(self, **kwargs):
         super(MedicineApp, self).__init__(**kwargs)
         x=datetime.today()
-        y=x.replace(day=x.day, hour=0, minute=6, second=0, microsecond=0)
+        y=x.replace(day=x.day, hour=21, minute=36, second=0, microsecond=0)
         delta_t=y-x
         secs=delta_t.seconds+1
-        t = Timer(secs, mail)
+        t = Timer(secs, self.mail)
         t.start()
 
     def build(self):
         self.title = 'Smart Medicine Dispenser'
         return MainScreen()
     
-    def mail():
+    def mail(self):
         gmail_user = 'smartdispenser0@gmail.com'
         gmail_pwd = 'abcd@12345_678'
         gmail_send = 'smartdispenser0@gmail.com'
