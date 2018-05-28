@@ -98,7 +98,7 @@ class MainScreen(BoxLayout):
             text = "The medicine " + medName +" is near depletion, please refill."
             sms.send_msg(text)
             
-        #medName':(pin, delay)
+        #pindelay is a dictionary which contains {'medName':(pin, delay)}
         pindelay = {'Biogesic':(4,4), 'Buscopan':(6,4), 'Decolgen':(), 'DecolgenND':(), 'Solmux': ()}
         self.dispense(pindelay[medName])
         
