@@ -55,9 +55,9 @@ class MainScreen(BoxLayout):
         self.servocontrol = ServoControl()
         
     def switch(self):
-        Window.allow_vkeyboard = !Window.allow_vkeyboard
-        Window.single_vkeyboard = !Window.single_vkeyboard
-        Window.docked_vkeyboard = !Window.docked_vkeyboard
+        Window.allow_vkeyboard = not Window.allow_vkeyboard
+        Window.single_vkeyboard = not Window.single_vkeyboard
+        Window.docked_vkeyboard = not Window.docked_vkeyboard
             
     def close(self, *args):
         Window.allow_vkeyboard = False
