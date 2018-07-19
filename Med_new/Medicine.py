@@ -17,6 +17,9 @@ from kivy.properties import ObjectProperty
 from kivy.core.window import Window
 from kivy.utils import get_color_from_hex
 from kivy.uix.textinput import TextInput
+from kivy.uix.vkeyboard import VKeyboard
+from kivy.uix.gridlayout import GridLayout
+from kivy.animation import Animation
 
 import wrapper
 import sms
@@ -50,8 +53,54 @@ class MainScreen(BoxLayout):
     def __init__(self, **kwargs):
         super(MainScreen, self).__init__(**kwargs)
         self.servocontrol = ServoControl()
+        
+    def switch(self, button)
+        if button.state == 'down';
+            Window.allow_vkeyboard = True
+            Window.single_vkeyboard = True
+            Window.docked_vkeyboard = True
+            
+        else:
+            Window.allow_vkeyboard = False
+            Window.single_vkeyboard = False
+            Window.docked_vkeyboard = False
+            
+    def close(self, *args)
+        Window.allow_vkeyboard = False
+        Window.single_vkeyboard = False
+        Window.docked_vkeyboard = Falsee
 
     def changeScreen(self, next_screen):
+        
+        if next_screen == "admin login":
+            self.ids.kivy_screen_manager.current = "admin_screen"
+
+        if next_screen == "enter":
+            self.ids.kivy_screen_manager.current = "count_screen"
+
+        if next_screen == "back":
+            self.ids.kivy_screen_manager.current = "barcode_screen"
+
+        if next_screen == "log out":
+            self.ids.kivy_screen_manager.current = "admin_screen"
+
+        if next_screen == "go back":
+            self.ids.kivy_screen_manager.current = "count_screen"
+
+        if next_screen == "set biogesic":
+            self.ids.kivy_screen_manager.current = "bio_screen"
+
+        if next_screen == "set buscopan":
+            self.ids.kivy_screen_manager.current = "busco_screen"
+
+        if next_screen == "set decolgen no-drowse":
+            self.ids.kivy_screen_manager.current = "decol_screen"
+
+        if next_screen == "set dolfenal":
+            self.ids.kivy_screen_manager.current = "dolfe_screen"
+
+        if next_screen == "set solmux":
+            self.ids.kivy_screen_manager.current = "sol_screen"
 
         if next_screen == "confirm":
             #user=wrapper.select()
