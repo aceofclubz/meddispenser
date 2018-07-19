@@ -23,16 +23,6 @@
 <MainScreen>:
     orientation: 'vertical'
 
-    ActionBar:
-        ActionView:
-            ActionPrevious:
-                titles:""
-                with_previous: False
-            ActionOverflow:
-                ActionButton:
-                    text:"Settings"
-                    on_press: app.open_settings()
-
     ScreenManager:
         id: kivy_screen_manager
 
@@ -40,9 +30,37 @@
             id: barcode_screen
             name: "barcode_screen"
 
+        AdminScreen:
+            id: admin_screen
+            name: "admin_screen"
+
         StartScreen:
             id: start_screen
             name: "start_screen"
+
+        CountScreen:
+            id: count_screen
+            name: "count_screen"
+
+        BioScreen:
+            id: bio_screen
+            name: "bio_screen"
+
+        BuscoScreen:
+            id: busco_screen
+            name: "busco_screen"
+
+        DecolScreen:
+            id: decol_screen
+            name: "decol_screen"
+
+        DolfeScreen:
+            id: dolfe_screen
+            name: "dolfe_screen"
+
+        SolScreen:
+            id: sol_screen
+            name: "sol_screen"
 
         FirstScreen:
             id: first_screen
@@ -83,7 +101,7 @@
             font_size: 25
 
         TextInput:
-            id: password
+            id: passw
             text: ''
             multiline: False
             halign: "center"
@@ -91,7 +109,6 @@
             markup: True
             font_size: 40
             cursor_blink: True
-
 
         Button:
             text: "Confirm"
@@ -101,7 +118,545 @@
         Button:
             text: "Clear"
             font_size: 25
-            on_release: self.ids.password.current = ''
+            on_release: passw.text = ''
+
+        Button:
+            text: "Admin Login"
+            font_size: 25
+            on_release: app.root.changeScreen(self.text.lower())
+
+<AdminScreen@Screen>
+    BoxLayout:
+        #Settings
+        orientation:"vertical"
+
+        #about 2% of the width
+        padding: root.width * 0.02, root.height * .02
+
+        #minimum of 2% of the root width and root height of the text
+        spacing: min(root.width, root.height) *.02
+
+        Label:
+            text: "Username: "
+            font_size: 25
+
+        TextInput:
+            id: admin
+            text: ''
+            multiline: False
+            halign: "center"
+            valign: "middle"
+            markup: True
+            font_size: 25
+            cursor_blink: True
+
+        Label:
+            text: "Password: "
+            font_size: 25
+
+        TextInput:
+            id: code
+            text: ''
+            multiline: False
+            halign: "center"
+            valign: "middle"
+            markup: True
+            font_size: 25
+            cursor_blink: True
+			password: True
+
+        ToggleButton:
+            text: 'keyboard'
+            on_state: app.root.switch(self)
+            size_hint: 1, None
+
+        Button:
+            text: "Enter"
+            font_size: 25
+			on_press: app.root.close()
+            on_release: app.root.changeScreen(self.text.lower())
+
+        Button:
+            text: "Back"
+            font_size: 25
+			on_press: app.root.close()
+            on_release: app.root.changeScreen(self.text.lower())
+
+<CountScreen@Screen>
+    BoxLayout:
+        #Settings
+        orientation:"vertical"
+
+        #about 2% of the width
+        padding: root.width * 0.02, root.height * .02
+
+        #minimum of 2% of the root width and root height of the text
+        spacing: min(root.width, root.height) *.02
+
+        #label found at the center of the start screen
+        WrappedLabel:
+            text:"[b][i][u]Medicine Count Reset:[/b][/i][/u]"
+            font_size: min(root.height, root.width) / 10
+
+        Button:
+            text: "Set Biogesic"
+            font_size: 25
+            on_release: app.root.changeScreen(self.text.lower())
+
+        Button:
+            text: "Set Buscopan"
+            font_size: 25
+            on_release: app.root.changeScreen(self.text.lower())
+
+        Button:
+            text: "Set Decolgen No-Drowse"
+            font_size: 25
+            on_release: app.root.changeScreen(self.text.lower())
+
+        Button:
+            text: "Set Dolfenal"
+            font_size: 25
+            on_release: app.root.changeScreen(self.text.lower())
+
+        Button:
+            text: "Set Solmux"
+            font_size: 25
+            on_release: app.root.changeScreen(self.text.lower())
+
+        Button:
+            text: "Log Out"
+            font_size: 25
+            on_release: app.root.changeScreen(self.text.lower())
+
+<BioScreen@Screen>
+    display: bioset
+    BoxLayout:
+        #Settings
+        orientation:"vertical"
+        #about 2% of the width
+        padding: root.width * 0.02, root.height * .02
+
+        #minimum of 2% of the root width and root height of the text
+        spacing: min(root.width, root.height) *.02
+
+        Label:
+            text: "Biogesic Medicine Count Set"
+            font_size: 25
+            size_hint:[1,0.2]
+
+        TextInput:
+            id: bioset
+            text: ''
+            multiline: False
+            halign: "center"
+            valign: "middle"
+            markup: True
+            font_size: 25
+            cursor_blink: True
+            size_hint:[1,0.3]
+
+        GridLayout:
+            cols: 3
+            padding: 10
+            spacing: 10
+
+            Button:
+                text: "1"
+                font_size: 25
+
+                on_press: bioset.text += self.text
+            Button:
+                text: "2"
+                font_size: 25
+                on_press: bioset.text += self.text
+            Button:
+                text: "3"
+                font_size: 25
+                on_press: bioset.text += self.text
+            Button:
+                text: "4"
+                font_size: 25
+                on_press: bioset.text += self.text
+            Button:
+                text: "5"
+                font_size: 25
+                on_press: bioset.text += self.text
+            Button:
+                text: "6"
+                font_size: 25
+                on_press: bioset.text += self.text
+            Button:
+                text: "7"
+                font_size: 25
+                on_press: bioset.text += self.text
+            Button:
+                text: "8"
+                font_size: 25
+                on_press: bioset.text += self.text
+            Button:
+                text: "9"
+                font_size: 25
+                on_press: bioset.text += self.text
+            Button:
+                text: "Clear"
+                font_size: 25
+                on_press: bioset.text = ""
+            Button:
+                text: "0"
+                font_size: 25
+                on_press: bioset.text += self.text
+            Button:
+                text: "Set"
+                font_size: 25
+
+            Button:
+                text: "Go Back"
+                font_size: 25
+                on_release: app.root.changeScreen(self.text.lower())
+<BuscoScreen@Screen>
+    display: buscoset
+    BoxLayout:
+        #Settings
+        orientation:"vertical"
+        #about 2% of the width
+        padding: root.width * 0.02, root.height * .02
+
+        #minimum of 2% of the root width and root height of the text
+        spacing: min(root.width, root.height) *.02
+
+        Label:
+            text: "Buscopan Medicine Count Set"
+            font_size: 25
+            size_hint:[1,0.2]
+
+        TextInput:
+            id: buscoset
+            text: ''
+            multiline: False
+            halign: "center"
+            valign: "middle"
+            markup: True
+            font_size: 25
+            cursor_blink: True
+            size_hint:[1,0.3]
+
+        GridLayout:
+            cols: 3
+            padding: 10
+            spacing: 10
+
+            Button:
+                text: "1"
+                font_size: 25
+
+                on_press: buscoset.text += self.text
+            Button:
+                text: "2"
+                font_size: 25
+                on_press: buscoset.text += self.text
+            Button:
+                text: "3"
+                font_size: 25
+                on_press: buscoset.text += self.text
+            Button:
+                text: "4"
+                font_size: 25
+                on_press: buscoset.text += self.text
+            Button:
+                text: "5"
+                font_size: 25
+                on_press: buscoset.text += self.text
+            Button:
+                text: "6"
+                font_size: 25
+                on_press: buscoset.text += self.text
+            Button:
+                text: "7"
+                font_size: 25
+                on_press: buscoset.text += self.text
+            Button:
+                text: "8"
+                font_size: 25
+                on_press: buscoset.text += self.text
+            Button:
+                text: "9"
+                font_size: 25
+                on_press: buscoset.text += self.text
+            Button:
+                text: "Clear"
+                font_size: 25
+                on_press: buscoset.text = ""
+            Button:
+                text: "0"
+                font_size: 25
+                on_press: buscoset.text += self.text
+            Button:
+                text: "Set"
+                font_size: 25
+
+            Button:
+                text: "Go Back"
+                font_size: 25
+                on_release: app.root.changeScreen(self.text.lower())
+
+<DecolScreen@Screen>
+    display: decolset
+    BoxLayout:
+        #Settings
+        orientation:"vertical"
+        #about 2% of the width
+        padding: root.width * 0.02, root.height * .02
+
+        #minimum of 2% of the root width and root height of the text
+        spacing: min(root.width, root.height) *.02
+
+        Label:
+            text: "Decolgen Medicine Count Set"
+            font_size: 25
+            size_hint:[1,0.2]
+
+        TextInput:
+            id: decolset
+            text: ''
+            multiline: False
+            halign: "center"
+            valign: "middle"
+            markup: True
+            font_size: 25
+            cursor_blink: True
+            size_hint:[1,0.3]
+
+        GridLayout:
+            cols: 3
+            padding: 10
+            spacing: 10
+
+            Button:
+                text: "1"
+                font_size: 25
+
+                on_press: decolset.text += self.text
+            Button:
+                text: "2"
+                font_size: 25
+                on_press: decolset.text += self.text
+            Button:
+                text: "3"
+                font_size: 25
+                on_press: decolset.text += self.text
+            Button:
+                text: "4"
+                font_size: 25
+                on_press: decolset.text += self.text
+            Button:
+                text: "5"
+                font_size: 25
+                on_press: decolset.text += self.text
+            Button:
+                text: "6"
+                font_size: 25
+                on_press: decolset.text += self.text
+            Button:
+                text: "7"
+                font_size: 25
+                on_press: decolset.text += self.text
+            Button:
+                text: "8"
+                font_size: 25
+                on_press: decolset.text += self.text
+            Button:
+                text: "9"
+                font_size: 25
+                on_press: decolset.text += self.text
+            Button:
+                text: "Clear"
+                font_size: 25
+                on_press: decolset.text = ""
+            Button:
+                text: "0"
+                font_size: 25
+                on_press: decolset.text += self.text
+            Button:
+                text: "Set"
+                font_size: 25
+
+            Button:
+                text: "Go Back"
+                font_size: 25
+                on_release: app.root.changeScreen(self.text.lower())
+
+<DolfeScreen@Screen>
+    display: dolfeset
+    BoxLayout:
+        #Settings
+        orientation:"vertical"
+        #about 2% of the width
+        padding: root.width * 0.02, root.height * .02
+
+        #minimum of 2% of the root width and root height of the text
+        spacing: min(root.width, root.height) *.02
+
+        Label:
+            text: "Dolfenal Medicine Count Set"
+            font_size: 25
+            size_hint:[1,0.2]
+
+        TextInput:
+            id: dolfeset
+            text: ''
+            multiline: False
+            halign: "center"
+            valign: "middle"
+            markup: True
+            font_size: 25
+            cursor_blink: True
+            size_hint:[1,0.3]
+
+        GridLayout:
+            cols: 3
+            padding: 10
+            spacing: 10
+
+            Button:
+                text: "1"
+                font_size: 25
+
+                on_press: dolfeset.text += self.text
+            Button:
+                text: "2"
+                font_size: 25
+                on_press: dolfeset.text += self.text
+            Button:
+                text: "3"
+                font_size: 25
+                on_press: dolfeset.text += self.text
+            Button:
+                text: "4"
+                font_size: 25
+                on_press: dolfeset.text += self.text
+            Button:
+                text: "5"
+                font_size: 25
+                on_press: dolfeset.text += self.text
+            Button:
+                text: "6"
+                font_size: 25
+                on_press: dolfeset.text += self.text
+            Button:
+                text: "7"
+                font_size: 25
+                on_press: dolfeset.text += self.text
+            Button:
+                text: "8"
+                font_size: 25
+                on_press: dolfeset.text += self.text
+            Button:
+                text: "9"
+                font_size: 25
+                on_press: dolfeset.text += self.text
+            Button:
+                text: "Clear"
+                font_size: 25
+                on_press: dolfeset.text = ""
+            Button:
+                text: "0"
+                font_size: 25
+                on_press: dolfeset.text += self.text
+            Button:
+                text: "Set"
+                font_size: 25
+
+            Button:
+                text: "Go Back"
+                font_size: 25
+                on_release: app.root.changeScreen(self.text.lower())
+
+<SolScreen@Screen>
+    display: solset
+    BoxLayout:
+        #Settings
+        orientation:"vertical"
+        #about 2% of the width
+        padding: root.width * 0.02, root.height * .02
+
+        #minimum of 2% of the root width and root height of the text
+        spacing: min(root.width, root.height) *.02
+
+        Label:
+            text: "Solmux Medicine Count Set"
+            font_size: 25
+            size_hint:[1,0.2]
+
+        TextInput:
+            id: solset
+            text: ''
+            multiline: False
+            halign: "center"
+            valign: "middle"
+            markup: True
+            font_size: 25
+            cursor_blink: True
+            size_hint:[1,0.3]
+
+        GridLayout:
+            cols: 3
+            padding: 10
+            spacing: 10
+
+            Button:
+                text: "1"
+                font_size: 25
+
+                on_press: solset.text += self.text
+            Button:
+                text: "2"
+                font_size: 25
+                on_press: solset.text += self.text
+            Button:
+                text: "3"
+                font_size: 25
+                on_press: solset.text += self.text
+            Button:
+                text: "4"
+                font_size: 25
+                on_press: solset.text += self.text
+            Button:
+                text: "5"
+                font_size: 25
+                on_press: solset.text += self.text
+            Button:
+                text: "6"
+                font_size: 25
+                on_press: solset.text += self.text
+            Button:
+                text: "7"
+                font_size: 25
+                on_press: solset.text += self.text
+            Button:
+                text: "8"
+                font_size: 25
+                on_press: solset.text += self.text
+            Button:
+                text: "9"
+                font_size: 25
+                on_press: solset.text += self.text
+            Button:
+                text: "Clear"
+                font_size: 25
+                on_press: solset.text = ""
+            Button:
+                text: "0"
+                font_size: 25
+                on_press: solset.text += self.text
+            Button:
+                text: "Set"
+                font_size: 25
+
+            Button:
+                text: "Go Back"
+                font_size: 25
+                on_release: app.root.changeScreen(self.text.lower())
+
 
 <StartScreen@Screen>
     BoxLayout:
