@@ -54,10 +54,10 @@ class MainScreen(BoxLayout):
         super(MainScreen, self).__init__(**kwargs)
         self.servocontrol = ServoControl()
         
-    def switch(self):
-        Window.allow_vkeyboard = not Window.allow_vkeyboard
-        Window.single_vkeyboard = not Window.single_vkeyboard
-        Window.docked_vkeyboard = not Window.docked_vkeyboard
+    def switch(self, state):
+        Window.allow_vkeyboard = state
+        Window.single_vkeyboard = state
+        Window.docked_vkeyboard = state
             
     def close(self, *args):
         Window.allow_vkeyboard = False
@@ -67,18 +67,18 @@ class MainScreen(BoxLayout):
     def changeScreen(self, next_screen):
         
         if next_screen == "admin login":
-            self.switch()
+            self.switch(True)
             self.ids.kivy_screen_manager.current = "admin_screen"
 
         if next_screen == "enter":
-            self.switch()
+            self.switch(False)
             self.ids.kivy_screen_manager.current = "count_screen"
 
         if next_screen == "back":
             self.ids.kivy_screen_manager.current = "barcode_screen"
 
         if next_screen == "log out":
-            self.switch()
+            self.switch(True)
             self.ids.kivy_screen_manager.current = "admin_screen"
 
         if next_screen == "go back":
