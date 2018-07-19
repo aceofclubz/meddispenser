@@ -242,22 +242,22 @@ class MainScreen(BoxLayout):
         sound.play()
 
     def sound2(self):
-        fname = 'Buscopan' + ".mp3"
+        fname = 'Buscopan' + ".wav"
         sound = SoundLoader.load(fname)
         sound.play()
 
     def sound3(self):
-        fname = 'Decolgen No-Drowse' + ".mp3"
+        fname = 'Decolgen No-Drowse' + ".wav"
         sound = SoundLoader.load(fname)
         sound.play()
 
     def sound4(self):
-        fname = 'Dolfenal' + ".mp3"
+        fname = 'Dolfenal' + ".wav"
         sound = SoundLoader.load(fname)
         sound.play()
 
     def sound5(self):
-        fname = 'Solmux' + ".mp3"
+        fname = 'Solmux' + ".wav"
         sound = SoundLoader.load(fname)
         sound.play()
         
