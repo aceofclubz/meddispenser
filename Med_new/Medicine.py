@@ -54,8 +54,8 @@ class MainScreen(BoxLayout):
         super(MainScreen, self).__init__(**kwargs)
         self.servocontrol = ServoControl()
         
-    def switch(self, button)
-        if button.state == 'down';
+    def switch(self, button):
+        if button.state == 'down':
             Window.allow_vkeyboard = True
             Window.single_vkeyboard = True
             Window.docked_vkeyboard = True
@@ -65,10 +65,10 @@ class MainScreen(BoxLayout):
             Window.single_vkeyboard = False
             Window.docked_vkeyboard = False
             
-    def close(self, *args)
+    def close(self, *args):
         Window.allow_vkeyboard = False
         Window.single_vkeyboard = False
-        Window.docked_vkeyboard = Falsee
+        Window.docked_vkeyboard = False
 
     def changeScreen(self, next_screen):
         
