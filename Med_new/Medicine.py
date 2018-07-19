@@ -237,7 +237,7 @@ class MainScreen(BoxLayout):
         self.popup.open()
 
     def sound1(self):
-        fname = 'Biogesic' + ".mp3"
+        fname = 'Biogesic' + ".wav"
         sound = SoundLoader.load(fname)
         sound.play()
 
