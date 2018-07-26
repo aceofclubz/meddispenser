@@ -101,7 +101,7 @@
             font_size: 25
 
         TextInput:
-            id: passw
+            id: bcode
             text: ''
             multiline: False
             halign: "center"
@@ -118,7 +118,7 @@
         Button:
             text: "Clear"
             font_size: 25
-            on_release: passw.text = ''
+            on_release: bcode.text = ''
 
         Button:
             text: "Admin Login"
@@ -151,7 +151,8 @@
             cursor_blink: True
 
         Label:
-            text: "Password: "
+            text: "
+            ord: "
             font_size: 25
 
         TextInput:
@@ -168,13 +169,11 @@
         Button:
             text: "Enter"
             font_size: 25
-			on_press: app.root.close()
-            on_release: app.root.changeScreen(self.text.lower())
+            on_release: app.root.admin(admin.text, code.text)
 
         Button:
             text: "Back"
             font_size: 25
-			on_press: app.root.close()
             on_release: app.root.changeScreen(self.text.lower())
 
 <CountScreen@Screen>
@@ -873,4 +872,3 @@
             text: "Back to Main Screen"
             font_size: 25
             on_release: app.root.changeScreen(self.text.lower())
-

@@ -44,28 +44,47 @@ class ServoControl:
         pi.set_servo_pulsewidth(g[0], 1300)
         time.sleep(g[1])
         pi.set_servo_pulsewidth(g[0], 0)
-        
+
         pi.stop
 
 class MainScreen(BoxLayout):
     user = ""
-    
+
     def __init__(self, **kwargs):
         super(MainScreen, self).__init__(**kwargs)
         self.servocontrol = ServoControl()
-        
+
     def switch(self, state):
         Window.allow_vkeyboard = state
         Window.single_vkeyboard = state
         Window.docked_vkeyboard = state
-            
-    def close(self, *args):
-        Window.allow_vkeyboard = False
-        Window.single_vkeyboard = False
-        Window.docked_vkeyboard = False
+
+    def bcode(self, barcode):
+        result = db.select('user', **{'uid':barcode})
+        if result:
+            self.changeScreen('confirm')
+
+        else:
+            self.pop = Popup(title='Invalid Login',
+                        size_hint=(None, None), pos=(30,30) ,size=(650, 600))
+            ok_btn = Button(text="OK", on_press=self.popup.dismiss)
+            content.add_widget(ok_btn)
+            self.pop.open()
+
+    def admin(self, user, passwd):
+        result = db.select('admin', **{'adminUser': user, 'adminPass': passwd})
+        if result:
+            self.changeScreen('enter')
+
+        else:
+            self.pop = Popup(title='Invalid Login',
+                        size_hint=(None, None), pos=(30,30) ,size=(650, 600))
+            ok_btn = Button(text="OK", on_press=self.popup.dismiss)
+            content.add_widget(ok_btn)
+            self.pop.open()
 
     def changeScreen(self, next_screen):
-        
+
         if next_screen == "admin login":
             self.switch(True)
             self.ids.kivy_screen_manager.current = "admin_screen"
@@ -75,6 +94,7 @@ class MainScreen(BoxLayout):
             self.ids.kivy_screen_manager.current = "count_screen"
 
         if next_screen == "back":
+            self.switch(False)
             self.ids.kivy_screen_manager.current = "barcode_screen"
 
         if next_screen == "log out":
@@ -134,21 +154,21 @@ class MainScreen(BoxLayout):
 
         medID = value['mid']
         medCount = int(value['count']) - 1
-        
+
         db.update('medicine', 'medName', medName, **{'count':medCount})
         self.user='2201200111695U'
         transValues = {'userID':self.user, 'medID':medID, 'datetime':datetime.now().strftime('%Y-%m-%d %H:%M:%S'), 'presentCount':medCount}
         db.insert('transaction', **transValues)
-        
+
         if medCount <= 5:
             text = "The medicine " + medName +" is near depletion, please refill."
             sms.send_msg(text)
-            
+
         #pindelay is a dictionary which contains {'medName':(pin, delay)}
         pindelay = {'Biogesic':(4, 4), 'Buscopan':(5, 4), 'Decolgen':(6, 4), 'DecolgenND':(13, 4), 'Solmux': (29, 4)}
         self.dispense(pindelay[medName])
-        
-           
+
+
     def pop1(self):
         self.pop = Popup(title='Information', content=Image(source='biogesic.png'),
                     size_hint=(None, None), pos=(30,30) ,size=(650, 600))
@@ -173,14 +193,14 @@ class MainScreen(BoxLayout):
         self.pop = Popup(title='Information', content=Image(source='solmux.png'),
                     size_hint=(None, None), pos=(30,30) ,size=(650, 600))
         self.pop.open()
-        
+
 
     def dispense(self, g):
         print(g)
         self.servocontrol.servo_rotate(g)
         self.popup.dismiss()
         self.changeScreen('back to main screen')
-        
+
     def conpop1(self):
         content = BoxLayout(orientation="horizontal")
         self.popup = Popup(title="Confirm Biogesic", size_hint=(None, None),
@@ -260,8 +280,8 @@ class MainScreen(BoxLayout):
         fname = 'Solmux' + ".wav"
         sound = SoundLoader.load(fname)
         sound.play()
-        
-        
+
+
 
 #app object
 class MedicineApp(App):
@@ -278,7 +298,7 @@ class MedicineApp(App):
     def build(self):
         self.title = 'Smart Medicine Dispenser'
         return MainScreen()
-    
+
     def mail(self):
         gmail_user = 'smartdispenser0@gmail.com'
         gmail_pwd = 'abcd@12345_678'
@@ -291,7 +311,7 @@ class MedicineApp(App):
         message = 'Please be advised to check the status of the database. It can be accesed through local host'
         server.sendmail(gmail_user, gmail_send, message)
         server.quit()
-            
+
 if __name__== '__main__':
     MedicineApp().run()
 
