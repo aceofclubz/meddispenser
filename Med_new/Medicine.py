@@ -61,7 +61,7 @@ class MainScreen(BoxLayout):
 
     def bcode(self, barcode):
         result = db.select('user', **{'uid':barcode})
-        if result.with_rows():
+        if result.with_rows:
             self.user = barcode
             self.changeScreen('confirm')
         else:
@@ -73,7 +73,7 @@ class MainScreen(BoxLayout):
 
     def admin(self, user, passwd):
         result = db.select('admin', **{'adminUser': user, 'adminPass': passwd})
-        if result.with_rows():
+        if result.with_row:
             self.changeScreen('enter')
         else:
             self.pop = Popup(title='Invalid Login',
