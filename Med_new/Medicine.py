@@ -65,20 +65,21 @@ class MainScreen(BoxLayout):
             self.user = barcode
             self.changeScreen('confirm')
         else:
-            self.pop = Popup(title='Invalid Login',
-                        size_hint=(None, None), pos=(30,30) ,size=(650, 600))
-            ok_btn = Button(text="OK", on_press=self.popup.dismiss)
+            content = BoxLayout(orientation="vertical")
+            self.pop = Popup(title='Error',size=(500, 200), auto_dismiss=False, content=content)
+            ok_btn = Button(text="OK", on_press=self.pop.dismiss, size_hint_y=.3, font_size='20dp')
+            content.add_widget(Label(text="Invalid Login", size_hint_y=.7,font_size='75dp'))
             content.add_widget(ok_btn)
             self.pop.open()
 
     def admin(self, user, passwd):
         result = db.select('admin', **{'adminUser': user, 'adminPass': passwd})
-        if result.with_row:
+        if result.with_rows:
             self.changeScreen('enter')
         else:
-            self.pop = Popup(title='Invalid Login',
-                        size_hint=(None, None), pos=(30,30) ,size=(650, 600))
-            ok_btn = Button(text="OK", on_press=self.popup.dismiss)
+            content = BoxLayout(orientation="horizontal")
+            ok_btn = Button(text="OK", on_press=self.pop.dismiss, size_hint_y=.3, font_size='20dp')
+            content.add_widget(Label(text="Invalid Login", size_hint_y=.7,font_size='75dp'))
             content.add_widget(ok_btn)
             self.pop.open()
 
