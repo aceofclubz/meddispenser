@@ -61,9 +61,9 @@ class MainScreen(BoxLayout):
 
     def bcode(self, barcode):
         result = db.select('user', **{'uid':barcode})
-        if result:
+        if result.with_rows():
+            self.user = barcode
             self.changeScreen('confirm')
-
         else:
             self.pop = Popup(title='Invalid Login',
                         size_hint=(None, None), pos=(30,30) ,size=(650, 600))
@@ -73,9 +73,8 @@ class MainScreen(BoxLayout):
 
     def admin(self, user, passwd):
         result = db.select('admin', **{'adminUser': user, 'adminPass': passwd})
-        if result:
+        if result.with_rows():
             self.changeScreen('enter')
-
         else:
             self.pop = Popup(title='Invalid Login',
                         size_hint=(None, None), pos=(30,30) ,size=(650, 600))
@@ -156,7 +155,6 @@ class MainScreen(BoxLayout):
         medCount = int(value['count']) - 1
 
         db.update('medicine', 'medName', medName, **{'count':medCount})
-        self.user='2201200111695U'
         transValues = {'userID':self.user, 'medID':medID, 'datetime':datetime.now().strftime('%Y-%m-%d %H:%M:%S'), 'presentCount':medCount}
         db.insert('transaction', **transValues)
 
