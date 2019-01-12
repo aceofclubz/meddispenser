@@ -83,6 +83,13 @@ class MainScreen(BoxLayout):
             content.add_widget(ok_btn)
             self.pop.open()
 
+    def reset(self, medID, count):
+        if int(count) > 20:
+            count = "20"
+        db.update('medicine', 'medID', medID, **{'count':medCount})
+        self.changeScreen("back to main screen")
+
+
     def changeScreen(self, next_screen):
 
         if next_screen == "admin login":
