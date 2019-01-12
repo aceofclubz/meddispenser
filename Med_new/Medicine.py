@@ -86,7 +86,7 @@ class MainScreen(BoxLayout):
     def reset(self, medID, count):
         if int(count) > 20:
             count = "20"
-        db.update('medicine', 'medID', medID, **{'count':medCount})
+        db.update('medicine', 'mid', medID, **{'count':count})
         self.changeScreen("back to main screen")
 
 
@@ -162,7 +162,7 @@ class MainScreen(BoxLayout):
         medID = value['mid']
         medCount = int(value['count']) - 1
 
-        db.update('medicine', 'medName', medName, **{'count':medCount})
+        db.update('medicine', 'mid', medName, **{'count':medCount})
         transValues = {'userID':self.user, 'medID':medID, 'datetime':datetime.now().strftime('%Y-%m-%d %H:%M:%S'), 'presentCount':medCount}
         db.insert('transaction', **transValues)
 
