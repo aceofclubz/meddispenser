@@ -63,9 +63,9 @@ class MainScreen(BoxLayout):
         result = db.select('user', **{'uid':barcode})
         if result.with_rows:
             self.user = barcode
-            usertransact = db.select('transaction', **{'userID':barcode, 'datetime'
-            :"date({})".format(datetime.now())})
-            if len(usertransact) < 2:
+            usertransact = db.select('transaction', **{'userID':barcode, 'date(datetime)'
+            :datetime.now().date()})
+            if usertransact.rowcount < 2:
                 self.changeScreen('confirm')
 
         else:
