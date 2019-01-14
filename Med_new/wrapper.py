@@ -22,7 +22,14 @@ class Wrapper:
     def select(self, tablename, **kwargs):
         x = *kwargs,
         y = *kwargs.values(),
-        query = "SELECT * FROM " + tablename + " WHERE " + str(x[0]) + " = \'" + str(y[0]) + "\'"
+        if len(x) > 1:
+            query = "SELECT * FROM " + tablename + " WHERE "
+            for i in range(len(x)):
+                query = query + str(x[i]) + " = \'" + str(y[i]) + "\'"
+                if i < len(x) - 1:
+                    query = query + " AND "
+        else:
+            query = "SELECT * FROM " + tablename + " WHERE " + str(x[0]) + " = \'" + str(y[0]) + "\'"
         print(query)
         self.cursor.execute(query)
         return self.cursor
@@ -34,6 +41,3 @@ class Wrapper:
         print(query)
         self.cursor.execute(query)
         return
-        
-
-
