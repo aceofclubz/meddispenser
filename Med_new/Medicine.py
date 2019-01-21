@@ -61,7 +61,7 @@ class MainScreen(BoxLayout):
 
     def bcode(self, barcode):
         result = db.select('user', **{'uid':barcode})
-        if result.with_rows:
+        if result.rowcount > 0:
             self.user = barcode
             usertransact = db.select('transaction', **{'userID':barcode, 'date(datetime)'
             :datetime.now().date()})
@@ -87,12 +87,13 @@ class MainScreen(BoxLayout):
 
     def admin(self, user, passwd):
         result = db.select('admin', **{'adminUser': user, 'adminPass': passwd})
-        if result.with_rows:
+        if result.rowcount > 0:
             self.changeScreen('enter')
         else:
-            content = BoxLayout(orientation="horizontal")
+            content = BoxLayout(orientation="vertical")
+            self.pop = Popup(title='Error',size=(500, 200), auto_dismiss=False, content=content)
             ok_btn = Button(text="OK", on_press=self.pop.dismiss, size_hint_y=.3, font_size='20dp')
-            content.add_widget(Label(text="Invalid Login", size_hint_y=.7,font_size='75dp'))
+            content.add_widget(Label(text="Invalid Login", size_hint_y=.7,font_size='30dp'))
             content.add_widget(ok_btn)
             self.pop.open()
 
