@@ -109,10 +109,12 @@
             markup: True
             font_size: 40
             cursor_blink: True
+            focus: True
 
         Button:
             text: "Confirm"
             font_size: 25
+            on_press: bcode.text = ''
             on_release: app.root.bcode(bcode.text)
 
         Button:
