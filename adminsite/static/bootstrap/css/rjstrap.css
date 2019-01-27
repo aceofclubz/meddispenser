@@ -1,0 +1,54 @@
+img {
+    width: 20px;
+    height: 20px;
+}
+
+.hide {
+    display: none;
+}
+
+.container {
+    padding-top: 10px;
+    width: 90%
+}
+
+.navbar {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border: 0;
+    border-radius: 0;
+    margin-bottom: 0;
+    font-size: 12px;
+    letter-spacing: 5px;
+}
+
+.navbar-nav li a:hover {
+    color: #1abc9c !important;
+}
+
+body {
+    font: 400 15px "Montserrat", sans-serif;
+    line-height: 1.8;
+
+    background-color: #34cbd1;
+}
+
+.bg-1 {
+
+    color: #ffffff;
+    padding: 15px 25px;
+}
+
+.table {
+    color: #474e5d; /* Dark Blue */
+    background-color: #ffffff;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    /* Set the fixed height of the footer here */
+    height: 60px;
+    background-color: #f5f5f5;
+}

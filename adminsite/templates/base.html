@@ -1,0 +1,26 @@
+{% load static %}<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>{% block title %}Medicine Dispenser Database{% endblock %}</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/rjstrap.css' %}">
+    {% block stylesheet %}{% endblock %}
+  </head>
+  <body>
+    <header>
+      ...
+    </header>
+    <main>
+      {% block content %}
+      {% endblock %}
+    </main>
+    <footer>
+      ...
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/adminsite.js' %}"></script>
+    {% block javascript %}{% endblock %}
+  </body>
+</html>
