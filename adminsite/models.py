@@ -34,7 +34,6 @@ class Transaction(models.Model):
     userid = models.ForeignKey('User', models.DO_NOTHING, db_column='userID', blank=True, null=True)  # Field name made lowercase.
     datetime = models.DateTimeField(blank=True, null=True)
     presentcount = models.IntegerField(db_column='presentCount', blank=True, null=True)  # Field name made lowercase.
-
     class Meta:
         managed = False
         db_table = 'transaction'
