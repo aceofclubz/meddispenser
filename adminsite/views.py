@@ -55,9 +55,9 @@ def transact_u(request, user_id):
 def transact_med(request, med_id):
     Transaction.objects.filter(medid=med_id)
     pass
-
-
 def medicine(request):
+
+
     pass
 
 
