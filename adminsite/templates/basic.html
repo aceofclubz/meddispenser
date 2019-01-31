@@ -1,24 +1,53 @@
 {% extends 'base.html' %}
 {%  block stylesheet %}
+    .sidenav {
+  height: 100%; /* Full-height: remove this if you want "auto" height */
+  width: 180px; /* Set the width of the sidebar */
+  position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+  z-index: 1; /* Stay on top */
+  top: 0; /* Stay at the top */
+  left: 0;
+  background-color: #111; /* Black */
+  overflow-x: hidden; /* Disable horizontal scroll */
+  padding-top: 20px;
+}
+
+/* The navigation menu links */
+.sidenav a {
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 22px;
+  color: #818181;
+  display: block;
+}
+
+/* When you mouse over the navigation links, change their color */
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+
+/* Style page content */
+.main {
+  margin-left: 180px; /* Same as the width of the sidebar */
+  padding: 0px 10px;
+}
+
+/* On smaller screens, where height is less than 450px, change the style of the sidebar (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
     {% block styles %}
     {% endblock %}
 {%  endblock %}
 {% block content %}
-    <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Welcome {{ request.session.user }}</a>
-      <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
-      <ul class="navbar-nav px-3">
-        <li class="nav-item text-nowrap">
-          <a class="nav-link" href="{%  url 'logout' %}">Sign out</a>
-        </li>
-      </ul>
-    </nav>
     <div class="sidenav">
-        <p>
+        <p> Welcome {{ request.session.user }}
         <a href="{% url 'transactions_all' %}">Transactions</a>
         <a href="{% url 'user' %}">Users</a>
         <a href="{% url 'medicine' %}">Medicines</a>
     </div>
+    <div class="main">
     {% block innercontent %}
-    {% endblock %}
+    {% endblock %}</div>
 {% endblock %}
