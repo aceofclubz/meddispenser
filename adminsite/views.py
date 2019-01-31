@@ -16,13 +16,14 @@ def login(request):
             context['fail'] = True
             return render(request, 'signin.html', context)
     else:
-        context['form'] = AdminForm()
+        context['field'] = AdminForm()
         return render(request, 'signin.html', context)
 
 
 def logout(request):
     try:
         del request.session['admin_id']
+        del request.session['user']
     except KeyError:
         pass
     return redirect('/')
@@ -30,7 +31,8 @@ def logout(request):
 
 def index(request):
     try:
-        context = {'user': request.session['user']}
+        context = {}
+        context['user'] = request.session['user']
         context['transactions'] = Transaction.objects.all()
         return render(request, 'index.html', context)
     except KeyError:
@@ -57,7 +59,8 @@ def transact_d(request):
 
 def transact_u(request, user_id):
     context = {}
-    context['transactions'] = Transaction.objects.filter(userid=user_id)
+    user = User.objects.get(uid=user_id)
+    context['transactions'] = Transaction.objects.filter(userid=user)
     return render(request, 'transaction.html', context)
 
 
