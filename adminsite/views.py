@@ -10,6 +10,7 @@ def login(request):
         m = Admin.objects.get(adminuser=request.POST['adminuser'])
         if m.adminpass == request.POST['adminpass']:
             request.session['admin_id'] = m.adminid
+            request.session['user'] = m.adminuser
             return redirect('/')
         else:
             context['fail'] = True
@@ -24,42 +25,49 @@ def logout(request):
         del request.session['admin_id']
     except KeyError:
         pass
-    return HttpResponse("You're logged out.")
+    return redirect('/')
 
 
 def index(request):
     try:
-        context = {'id': request.session['admin_id']}
-
+        context = {'user': request.session['user']}
+        context['transactions'] = Transaction.objects.all()
         return render(request, 'index.html', context)
     except KeyError:
         return redirect('/login')
 
 
 def users(request):
-    pass
-
+    context = {}
+    context['users'] = User.objects.all()
+    return render(request, 'user.html', context)
 
 def transact(request):
+    context = {}
+    context['transactions'] = Transaction.objects.all()
+    return render(request, 'transaction.html', context)
+
+def transact_d(request):
+    context = {}
     start_date = request.POST['start']
     end_date = request.POST['end']
-    Transaction.objects.filter(datetime=(start_date, end_date))
-    pass
+    context['transactions'] = Transaction.objects.filter(datetime=(start_date, end_date))
+    return render(request, 'transaction.html', context)
 
 
 def transact_u(request, user_id):
-    Transaction.objects.filter(userid=user_id)
-    pass
+    context = {}
+    context['transactions'] = Transaction.objects.filter(userid=user_id)
+    return render(request, 'transaction.html', context)
 
 
 def transact_med(request, med_id):
-    Transaction.objects.filter(medid=med_id)
-    pass
+    context = {}
+    context['transactions'] = Transaction.objects.filter(medid=med_id)
+    return render(request, 'transaction.html', context)
+
 def medicine(request):
+    context = {}
+    context['medicines'] = Medicine.objects.all()
+    return render(request, 'medicine.html', context)
 
-
-    pass
-
-
-def specificMedicine(request, med_id):
-    pass
