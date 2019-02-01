@@ -42,7 +42,7 @@ class ServoControl:
     pi = pigpio.pi()
     def servo_rotate(self, g):
         self.pi.set_servo_pulsewidth(g[0], 1300)
-        self.time.sleep(g[1])
+        time.sleep(g[1])
         self.pi.set_servo_pulsewidth(g[0], 0)
         self.pi.stop()
 
