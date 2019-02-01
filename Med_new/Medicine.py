@@ -39,13 +39,12 @@ Window.clearcolor = get_color_from_hex("0066BA")
 
 #root
 class ServoControl:
+    pi = pigpio.pi()
     def servo_rotate(self, g):
-        pi = pigpio.pi()
-        pi.set_servo_pulsewidth(g[0], 1300)
-        time.sleep(g[1])
-        pi.set_servo_pulsewidth(g[0], 0)
-
-        pi.stop
+        self.pi.set_servo_pulsewidth(g[0], 1300)
+        self.time.sleep(g[1])
+        self.pi.set_servo_pulsewidth(g[0], 0)
+        self.pi.stop
 
 class MainScreen(BoxLayout):
     user = ""
