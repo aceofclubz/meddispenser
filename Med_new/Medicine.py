@@ -185,7 +185,7 @@ class MainScreen(BoxLayout):
             sms.send_msg(text)
 
         #pindelay is a dictionary which contains {'medName':(pin, delay)}
-        pindelay = {'Biogesic':(4, 2), 'Buscopan':(5, 4), 'Decolgen':(6, 4), 'DecolgenND':(13, 4), 'Solmux': (26, 4)}
+        pindelay = {'Dolfenal':(4, 2), 'Solmux':(5, 4), 'Buscopan':(6, 4), 'DecolgenND':(13, 4), 'Biogesic': (26, 4)}
         self.dispense(pindelay[medName])
 
 
