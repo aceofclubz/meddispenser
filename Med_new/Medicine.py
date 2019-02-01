@@ -185,7 +185,7 @@ class MainScreen(BoxLayout):
             sms.send_msg(text)
 
         #pindelay is a dictionary which contains {'medName':(pin, delay)}
-        pindelay = {'Dolfenal':(4, 2), 'Solmux':(5, 4), 'Buscopan':(6, 4), 'DecolgenND':(13, 4), 'Biogesic': (26, 4)}
+        pindelay = {'Dolfenal':(4, 1), 'Solmux':(5, 1), 'Buscopan':(6, 1), 'DecolgenND':(13, 1), 'Biogesic': (26, 1)}
         self.dispense(pindelay[medName])
 
 
@@ -309,7 +309,7 @@ class MedicineApp(App):
     def __init__(self, **kwargs):
         super(MedicineApp, self).__init__(**kwargs)
         x=datetime.today()
-        y=x.replace(day=x.day, hour=21, minute=36, second=0, microsecond=0)
+        y=x.replace(day=x.day, hour=20, minute=36, second=0, microsecond=0)
         delta_t=y-x
         secs=delta_t.seconds+1
         t = Timer(secs, self.mail)
