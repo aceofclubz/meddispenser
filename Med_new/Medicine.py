@@ -44,7 +44,7 @@ class ServoControl:
         self.pi.set_servo_pulsewidth(g[0], 1300)
         self.time.sleep(g[1])
         self.pi.set_servo_pulsewidth(g[0], 0)
-        self.pi.stop
+        self.pi.stop()
 
 class MainScreen(BoxLayout):
     user = ""
