@@ -39,12 +39,12 @@ Window.clearcolor = get_color_from_hex("0066BA")
 
 #root
 class ServoControl:
-    pi = pigpio.pi()
     def servo_rotate(self, g):
-        self.pi.set_servo_pulsewidth(g[0], 1300)
+        pi = pigpio.pi()
+        pi.set_servo_pulsewidth(g[0], 950 if g[0]==26 else 1100)
         time.sleep(g[1])
-        self.pi.set_servo_pulsewidth(g[0], 0)
-        self.pi.stop()
+        pi.set_servo_pulsewidth(g[0], 0)
+        pi.stop()
 
 class MainScreen(BoxLayout):
     user = ""
@@ -100,7 +100,7 @@ class MainScreen(BoxLayout):
         if int(count) > 20:
             count = "20"
         db.update('medicine', 'mid', medID, **{'count':count})
-        self.changeScreen("back to main screen")
+        self.changeScreen('enter')
 
 
     def changeScreen(self, next_screen):
@@ -175,7 +175,7 @@ class MainScreen(BoxLayout):
         medID = value['mid']
         medCount = int(value['count']) - 1
 
-        db.update('medicine', 'mid', medName, **{'count':medCount})
+        db.update('medicine', 'mid', medID, **{'count':medCount})
         transValues = {'userID':self.user, 'medID':medID, 'datetime':datetime.now().strftime('%Y-%m-%d %H:%M:%S'), 'presentCount':medCount}
         db.insert('transaction', **transValues)
 
