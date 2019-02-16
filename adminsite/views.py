@@ -33,7 +33,7 @@ def index(request):
     try:
         context = {}
         context['user'] = request.session['user']
-        context['transactions'] = Transaction.objects.all()
+        context['transactions'] = Transaction.objects.all().order_by('-datetime')
         return render(request, 'index.html', context)
     except KeyError:
         return redirect('/login')
@@ -46,27 +46,27 @@ def users(request):
 
 def transact(request):
     context = {}
-    context['transactions'] = Transaction.objects.all()
+    context['transactions'] = Transaction.objects.all().order_by('-datetime')
     return render(request, 'transaction.html', context)
 
 def transact_d(request):
     context = {}
     start_date = request.POST['start']
     end_date = request.POST['end']
-    context['transactions'] = Transaction.objects.filter(datetime=(start_date, end_date))
+    context['transactions'] = Transaction.objects.filter(datetime=(start_date, end_date)).order_by('-datetime')
     return render(request, 'transaction.html', context)
 
 
 def transact_u(request, user_id):
     context = {}
     user = User.objects.get(uid=user_id)
-    context['transactions'] = Transaction.objects.filter(userid=user)
+    context['transactions'] = Transaction.objects.filter(userid=user).order_by('-datetime')
     return render(request, 'transaction.html', context)
 
 
 def transact_med(request, med_id):
     context = {}
-    context['transactions'] = Transaction.objects.filter(medid=med_id)
+    context['transactions'] = Transaction.objects.filter(medid=med_id).order_by('-datetime')
     return render(request, 'transaction.html', context)
 
 def medicine(request):

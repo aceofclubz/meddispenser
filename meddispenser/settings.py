@@ -77,7 +77,7 @@ WSGI_APPLICATION = 'meddispenser.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'dispenser',
+        'NAME': 'Dispenser',
         'USER': 'root',
         'PASSWORD': 'root',
         'OPTIONS': {

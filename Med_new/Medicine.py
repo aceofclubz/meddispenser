@@ -41,11 +41,10 @@ Window.clearcolor = get_color_from_hex("0066BA")
 class ServoControl:
     def servo_rotate(self, g):
         pi = pigpio.pi()
-        pi.set_servo_pulsewidth(g[0], 1300)
+        pi.set_servo_pulsewidth(g[0], 950 if g[0]==26 else 1100)
         time.sleep(g[1])
         pi.set_servo_pulsewidth(g[0], 0)
-
-        pi.stop
+        pi.stop()
 
 class MainScreen(BoxLayout):
     user = ""
@@ -101,7 +100,7 @@ class MainScreen(BoxLayout):
         if int(count) > 20:
             count = "20"
         db.update('medicine', 'mid', medID, **{'count':count})
-        self.changeScreen("back to main screen")
+        self.changeScreen('enter')
 
 
     def changeScreen(self, next_screen):
@@ -176,7 +175,7 @@ class MainScreen(BoxLayout):
         medID = value['mid']
         medCount = int(value['count']) - 1
 
-        db.update('medicine', 'mid', medName, **{'count':medCount})
+        db.update('medicine', 'mid', medID, **{'count':medCount})
         transValues = {'userID':self.user, 'medID':medID, 'datetime':datetime.now().strftime('%Y-%m-%d %H:%M:%S'), 'presentCount':medCount}
         db.insert('transaction', **transValues)
 
@@ -185,7 +184,7 @@ class MainScreen(BoxLayout):
             sms.send_msg(text)
 
         #pindelay is a dictionary which contains {'medName':(pin, delay)}
-        pindelay = {'Biogesic':(4, 4), 'Buscopan':(5, 4), 'Decolgen':(6, 4), 'DecolgenND':(13, 4), 'Solmux': (29, 4)}
+        pindelay = {'Dolfenal':(4, 1), 'Solmux':(5, 1), 'Buscopan':(6, 1), 'DecolgenND':(13, 1), 'Biogesic': (26, 1)}
         self.dispense(pindelay[medName])
 
 
@@ -223,7 +222,7 @@ class MainScreen(BoxLayout):
 
     def conpop1(self):
         content = BoxLayout(orientation="horizontal")
-        self.popup = Popup(title="Confirm Biogesic", size_hint=(None, None),
+        self.popup = Popup(title="Is Biogesic the medicine you need?", size_hint=(None, None),
                            size=(500, 200), auto_dismiss=False, content=content)
         servo1 = lambda x:self.transaction('Biogesic')
         yes_btn = Button(text="Yes", on_release = servo1)
@@ -234,7 +233,7 @@ class MainScreen(BoxLayout):
 
     def conpop2(self):
         content = BoxLayout(orientation="horizontal")
-        self.popup = Popup(title="Confirm Buscopan", size_hint=(None, None),
+        self.popup = Popup(title="Is Buscopan the medicine you need?", size_hint=(None, None),
                            size=(500, 200), auto_dismiss=False, content=content)
         servo2 = lambda x:self.transaction('Buscopan')
         yes_btn = Button(text="Yes", on_release = servo2)
@@ -245,7 +244,7 @@ class MainScreen(BoxLayout):
 
     def conpop3(self):
         content = BoxLayout(orientation="horizontal")
-        self.popup = Popup(title="Confirm Decolgen No-Drowse", size_hint=(None, None),
+        self.popup = Popup(title="Is Decolgen No-Drowse the medicine you need?", size_hint=(None, None),
                            size=(500, 200), auto_dismiss=False, content=content)
         servo3 = lambda x:self.transaction('DecolgenND')
         yes_btn = Button(text="Yes", on_release = servo3)
@@ -256,7 +255,7 @@ class MainScreen(BoxLayout):
 
     def conpop4(self):
         content = BoxLayout(orientation="horizontal")
-        self.popup = Popup(title="Confirm Dolfenal", size_hint=(None, None),
+        self.popup = Popup(title="Is Dolfenal the medicine you need?", size_hint=(None, None),
                            size=(500, 200), auto_dismiss=False, content=content)
         servo4 = lambda x:self.transaction('Dolfenal')
         yes_btn = Button(text="Yes", on_release = servo4)
@@ -267,7 +266,7 @@ class MainScreen(BoxLayout):
 
     def conpop5(self):
         content = BoxLayout(orientation="horizontal")
-        self.popup = Popup(title="Confirm Solmux", size_hint=(None, None),
+        self.popup = Popup(title="Is Solmux the medicine you need?", size_hint=(None, None),
                            size=(500, 200), auto_dismiss=False, content=content)
         servo5 = lambda x:self.transaction('Solmux')
         yes_btn = Button(text="Yes", on_release = servo5)
@@ -309,7 +308,7 @@ class MedicineApp(App):
     def __init__(self, **kwargs):
         super(MedicineApp, self).__init__(**kwargs)
         x=datetime.today()
-        y=x.replace(day=x.day, hour=21, minute=36, second=0, microsecond=0)
+        y=x.replace(day=x.day, hour=20, minute=36, second=0, microsecond=0)
         delta_t=y-x
         secs=delta_t.seconds+1
         t = Timer(secs, self.mail)
