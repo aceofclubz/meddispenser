@@ -65,7 +65,7 @@ class MainScreen(BoxLayout):
             usertransact = db.select('transaction', **{'userID':barcode, 'date(datetime)'
             :datetime.now().date()})
             print(usertransact.rowcount)
-            if usertransact.rowcount < 2 or True:
+            if usertransact.rowcount < 2:
                 self.changeScreen('confirm')
             else:
                 content = BoxLayout(orientation="vertical")
