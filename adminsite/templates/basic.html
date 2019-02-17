@@ -20,8 +20,16 @@
   color: #818181;
   display: block;
 }
+.sidenav p {
+  text-decoration: none;
+  color: #818181;
+  display: block;
+}
 
 /* When you mouse over the navigation links, change their color */
+h3{
+color: #f1f1f1;
+}
 .sidenav a:hover {
   color: #f1f1f1;
 }
@@ -65,7 +73,9 @@
 {%  endblock %}
 {% block content %}
     <div class="sidenav">
+        <h3> Smart OTC Medicine Dispenser Admin Page </h3>
         <p> Welcome {{ request.session.user }}
+        <br />
         <a href="{% url 'transactions_all' %}">Transactions</a>
         <a href="{% url 'user' %}">Users</a>
         <a href="{% url 'medicine' %}">Medicines</a>
