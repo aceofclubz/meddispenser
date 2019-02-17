@@ -4,10 +4,38 @@
 #:set LBlue "0066BA"
 #:set Blue "#16203B"
 #:set DBlue '#03A9F4'
+#:set Black "#000000"
+#:set Coral "#FE9970"
+#:set SweetCorn "#FFCC66"
+#:set Light "#F39E7B"
+#:set Orange "#FE804C"
+#:set Violet "#351C75"
+#:set Yellow "#FFFF00"
+#:set Dandelion "#FF9900"
+#:set Pink "#FF00FF"
+#:set DarkGray "#444444"
+#:set LGray "#666666"
+#:set LPink "#F4CCCC"
+#:set Maroon "#660000"
+#:set Torquiose "#066164"
+#:set Gold "#BF9000"
+#:set DViolet "#351C75"
+#:set DGreen "##274E13"
+#:set Fushia "#741B47"
+#:set LGreen "#B6D7A8"
+#:set MPink "#C27BA0"
+#:set FBlue "#CFE2F3"
+#:set BGreen "#6AA84F"
+#:set MRed "#CC0000"
+#:set DkRed "#990000"
+#:set White "#FFFFFF"
+#:set LtRed "#E06666"
+#:set Lime "#00FF00"
+#:set HPink "#C27BA0"
+
 
 <Button>
     bold: True
-    background_color: Color(LBlue)
 
 
 #takes the property of label
@@ -95,13 +123,25 @@
         #minimum of 2% of the root width and root height of the text
         spacing: min(root.width, root.height) *.02
 
+
         WrappedLabel:
             id: label
-            text: "Scan Barcode ID here: "
+            text: "WELCOME TO SMART OTC MEDICINE DISPENSER[+]"
+            bold: True
+            font_size: 30
+            color: Color(DkRed)
+
+        WrappedLabel:
+            id: label
+            text: "[Scan Barcode Here:]"
+            bold: True
             font_size: 25
+            color: Color(Violet)
 
         TextInput:
             id: bcode
+            background_color: Color(SweetCorn)
+            color: Color (White)
             text: ''
             multiline: False
             halign: "center"
@@ -109,41 +149,49 @@
             markup: True
             font_size: 40
             cursor_blink: True
+            focus: True
 
         Button:
             text: "Confirm"
             font_size: 25
-            on_release: bcode.text = ''
+            color: Color(White)
+            background_color: Color(DBlue)
             on_press: app.root.bcode(bcode.text)
+            on_release: bcode.text= ''
+
 
         Button:
             text: "Clear"
             font_size: 25
+            color: Color(White)
+            background_color: Color(DBlue)
             on_release: bcode.text = ''
 
         Button:
             text: "Admin Login"
             font_size: 25
+            color: Color(White)
+            background_color: Color(DBlue)
             on_release: app.root.changeScreen(self.text.lower())
 
 <AdminScreen@Screen>
     BoxLayout:
         #Settings
         orientation:"vertical"
-
         #about 2% of the width
         padding: root.width * 0.02, root.height * .02
-
         #minimum of 2% of the root width and root height of the text
         spacing: min(root.width, root.height) *.02
-
         Label:
             text: "Username: "
+            bold: True
+            color: Color(DkRed)
             font_size: 25
-
         TextInput:
             id: admin
             text: ''
+            background_color: Color(SweetCorn)
+            color: Color (White)
             multiline: False
             halign: "center"
             valign: "middle"
@@ -154,26 +202,42 @@
         Label:
             text: "Password: "
             font_size: 25
+            bold: True
+            color: Color(DkRed)
 
         TextInput:
             id: code
             text: ''
+            background_color: Color(SweetCorn)
+            color: Color (White)
             multiline: False
             halign: "center"
             valign: "middle"
             markup: True
             font_size: 25
             cursor_blink: True
-			password: True
+            password: True
 
         Button:
             text: "Enter"
             font_size: 25
+            background_color: Color(DkRed)
+            color: Color (White)
             on_release: app.root.admin(admin.text, code.text)
+
+        Button:
+            text: "Clear Field"
+            font_size: 25
+            background_color: Color(DkRed)
+            color: Color (White)
+            on_press: admin.text = ''
+            on_release: code.text = ''
 
         Button:
             text: "Back"
             font_size: 25
+            background_color: Color(DkRed)
+            color: Color (White)
             on_release: app.root.changeScreen(self.text.lower())
 
 <CountScreen@Screen>
@@ -190,36 +254,49 @@
         #label found at the center of the start screen
         WrappedLabel:
             text:"[b][i][u]Medicine Count Reset:[/b][/i][/u]"
+            color: Color (DGreen)
             font_size: min(root.height, root.width) / 10
 
         Button:
             text: "Set Biogesic"
             font_size: 25
+            background_color: Color(DGreen)
+            color: Color (White)
             on_release: app.root.changeScreen(self.text.lower())
 
         Button:
             text: "Set Buscopan"
             font_size: 25
+            background_color: Color(DGreen)
+            color: Color (White)
             on_release: app.root.changeScreen(self.text.lower())
 
         Button:
             text: "Set Decolgen No-Drowse"
             font_size: 25
+            background_color: Color(DGreen)
+            color: Color (White)
             on_release: app.root.changeScreen(self.text.lower())
 
         Button:
             text: "Set Dolfenal"
             font_size: 25
+            background_color: Color(DGreen)
+            color: Color (White)
             on_release: app.root.changeScreen(self.text.lower())
 
         Button:
             text: "Set Solmux"
             font_size: 25
+            background_color: Color(DGreen)
+            color: Color (White)
             on_release: app.root.changeScreen(self.text.lower())
 
         Button:
             text: "Log Out"
             font_size: 25
+            background_color: Color(DGreen)
+            color: Color (White)
             on_release: app.root.changeScreen(self.text.lower())
 
 <BioScreen@Screen>
@@ -236,11 +313,15 @@
         Label:
             text: "Biogesic Medicine Count Set"
             font_size: 25
+            bold: True
+            underline: True
+            color: Color(Red)
             size_hint:[1,0.2]
 
         TextInput:
             id: bioset
             text: ''
+            background_color: Color(SweetCorn)
             multiline: False
             halign: "center"
             valign: "middle"
@@ -303,7 +384,6 @@
                 text: "Set"
                 font_size: 25
                 on_release: app.root.reset(1, bioset.text)
-
             Button:
                 text: "Go Back"
                 font_size: 25
@@ -322,11 +402,15 @@
         Label:
             text: "Buscopan Medicine Count Set"
             font_size: 25
+            bold: True
+            underline: True
+            color: Color(Red)
             size_hint:[1,0.2]
 
         TextInput:
             id: buscoset
             text: ''
+            background_color: Color(SweetCorn)
             multiline: False
             halign: "center"
             valign: "middle"
@@ -389,7 +473,6 @@
                 text: "Set"
                 font_size: 25
                 on_release: app.root.reset(2, buscoset.text)
-
             Button:
                 text: "Go Back"
                 font_size: 25
@@ -409,11 +492,15 @@
         Label:
             text: "Decolgen Medicine Count Set"
             font_size: 25
+            bold: True
+            underline: True
+            color: Color(Red)
             size_hint:[1,0.2]
 
         TextInput:
             id: decolset
             text: ''
+            background_color: Color(SweetCorn)
             multiline: False
             halign: "center"
             valign: "middle"
@@ -475,8 +562,7 @@
             Button:
                 text: "Set"
                 font_size: 25
-                on_release: app.root.reset(3, decolset.text)
-
+                on_release: app.root.reset(3, decolset.text) 
             Button:
                 text: "Go Back"
                 font_size: 25
@@ -496,11 +582,15 @@
         Label:
             text: "Dolfenal Medicine Count Set"
             font_size: 25
+            bold: True
+            underline: True
+            color: Color(Red)
             size_hint:[1,0.2]
 
         TextInput:
             id: dolfeset
             text: ''
+            background_color: Color(SweetCorn)
             multiline: False
             halign: "center"
             valign: "middle"
@@ -562,8 +652,7 @@
             Button:
                 text: "Set"
                 font_size: 25
-                on_release: app.root.reset(4, dolfeset.text)
-
+                on_release: app.root.reset(4, dolfeset.text) 
             Button:
                 text: "Go Back"
                 font_size: 25
@@ -583,11 +672,15 @@
         Label:
             text: "Solmux Medicine Count Set"
             font_size: 25
+            bold: True
+            underline: True
+            color: Color(Red)
             size_hint:[1,0.2]
 
         TextInput:
             id: solset
             text: ''
+            background_color: Color(SweetCorn)
             multiline: False
             halign: "center"
             valign: "middle"
@@ -649,7 +742,7 @@
             Button:
                 text: "Set"
                 font_size: 25
-                on_release: app.root.reset(5, solset.text)
+                on_release: app.root.reset(5, solset.text) 
 
             Button:
                 text: "Go Back"
@@ -670,32 +763,44 @@
 
         #label found at the center of the start screen
         WrappedLabel:
-            text:"[b][i][u]Please select medicine:[/b][/i][/u]"
+            text:"[b][i]{Please select medicine:}[/b][/i]"
+            underline: True
+            color: Color(Violet)
             font_size: min(root.height, root.width) / 10
 
         Button:
             text: "Biogesic"
             font_size: 25
+            color: Color(Yellow)
+            background_color: Color(DViolet)
             on_release: app.root.changeScreen(self.text.lower())
 
         Button:
             text: "Buscopan"
             font_size: 25
+            color: Color(Yellow)
+            background_color: Color(DViolet)
             on_release: app.root.changeScreen(self.text.lower())
 
         Button:
             text: "Decolgen No-Drowse"
             font_size: 25
+            color: Color(Yellow)
+            background_color: Color(DViolet)
             on_release: app.root.changeScreen(self.text.lower())
 
         Button:
             text: "Dolfenal"
             font_size: 25
+            color: Color(Yellow)
+            background_color: Color(DViolet)
             on_release: app.root.changeScreen(self.text.lower())
 
         Button:
             text: "Solmux"
             font_size: 25
+            color: Color(Yellow)
+            background_color: Color(DViolet)
             on_release: app.root.changeScreen(self.text.lower())
 
 <FirstScreen@Screen>
@@ -712,26 +817,36 @@
         #label found at the center of the first screen
         WrappedLabel:
             text:"[b][i][u]Biogesic Option:[/b][/i][/u]"
+            color: Color(Light)
             font_size: min(root.height, root.width) / 10
 
         Button:
             text: "Information"
             font_size: 25
+            color: Color(Light)
+            background_color: Color(Torquiose)
             on_press: app.root.pop1()
 
         Button:
             text: "Play Audio"
             font_size: 25
+            color: Color(Light)
+            background_color: Color(Torquiose)
             on_release: app.root.sound1()
 
+
         Button:
-            text: "Confirm Biogesic"
+            text: "Dispense Biogesic"
             font_size: 25
+            color: Color(Light)
+            background_color: Color(Torquiose)
             on_release: app.root.conpop1()
 
         Button:
             text: "Back to Main Screen"
             font_size: 25
+            color: Color(Light)
+            background_color: Color(Torquiose)
             on_release: app.root.changeScreen(self.text.lower())
 
 <SecondScreen@Screen>
@@ -748,27 +863,37 @@
         #label found at the center of the first screen
         WrappedLabel:
             text:"[b][i][u]Buscopan Option:[/b][/i][/u]"
+            color: Color (HPink)
             font_size: min(root.height, root.width) / 10
 
         Button:
             text: "Information"
             font_size: 25
+            background_color: Color(HPink)
+            color: Color(Green)
             on_press: app.root.pop2()
 
         Button:
             text: "Play Audio"
             font_size: 25
+            background_color: Color(HPink)
+            color: Color(Green)
             on_release: app.root.sound2()
 
         Button:
             text: "Confirm Buscopan"
             font_size: 25
+            background_color: Color(HPink)
+            color: Color(Green)
             on_release: app.root.conpop2()
 
         Button:
             text: "Back to Main Screen"
             font_size: 25
+            background_color: Color(HPink)
+            color: Color(Green)
             on_release: app.root.changeScreen(self.text.lower())
+
 
 <ThirdScreen@Screen>
     BoxLayout:
@@ -784,26 +909,35 @@
         #label found at the center of the first screen
         WrappedLabel:
             text:"[b][i][u]Decolgen No-Drowse Option:[/b][/i][/u]"
+            color: Color(Gold)
             font_size: min(root.height, root.width) / 10
 
         Button:
             text: "Information"
             font_size: 25
+            background_color: Color(Yellow)
+            color: Color(Gold)
             on_press: app.root.pop3()
 
         Button:
             text: "Play Audio"
             font_size: 25
+            background_color: Color(Yellow)
+            color: Color(Gold)
             on_release: app.root.sound3()
 
         Button:
             text: "Confirm Decolgen No-Drowse"
             font_size: 25
+            background_color: Color(Yellow)
+            color: Color(Gold)
             on_release: app.root.conpop3()
 
         Button:
             text: "Back to Main Screen"
             font_size: 25
+            background_color: Color(Yellow)
+            color: Color(Gold)
             on_release: app.root.changeScreen(self.text.lower())
 
 <FourthScreen@Screen>
@@ -820,26 +954,35 @@
         #label found at the center of the first screen
         WrappedLabel:
             text:"[b][i][u]Dolfenal Option:[/b][/i][/u]"
+            color: Color(Fushia)
             font_size: min(root.height, root.width) / 10
 
         Button:
             text: "Information"
             font_size: 25
+            background_color: Color(Fushia)
+            color: Color(LGreen)
             on_press: app.root.pop4()
 
         Button:
             text: "Play Audio"
             font_size: 25
+            background_color: Color(Fushia)
+            color: Color(LGreen)
             on_release: app.root.sound4()
 
         Button:
             text: "Confirm Dolfenal"
             font_size: 25
+            background_color: Color(Fushia)
+            color: Color(LGreen)
             on_release: app.root.conpop4()
 
         Button:
             text: "Back to Main Screen"
             font_size: 25
+            background_color: Color(Fushia)
+            color: Color(LGreen)
             on_release: app.root.changeScreen(self.text.lower())
 
 <FifthScreen@Screen>
@@ -856,24 +999,34 @@
         #label found at the center of the first screen
         WrappedLabel:
             text:"[b][i][u]Solmux Option:[/b][/i][/u]"
+            color: Color (Blue)
             font_size: min(root.height, root.width) / 10
 
         Button:
             text: "Information"
             font_size: 25
+            background_color: Color(Blue)
+            color: Color(Lime)
             on_press: app.root.pop5()
 
         Button:
             text: "Play Audio"
             font_size: 25
+            background_color: Color(Blue)
+            color: Color(Lime)
             on_release: app.root.sound5()
 
         Button:
             text: "Confirm Solmux"
             font_size: 25
+            background_color: Color(Blue)
+            color: Color(Lime)
             on_release: app.root.conpop5()
 
         Button:
             text: "Back to Main Screen"
             font_size: 25
+            background_color: Color(Blue)
+            color: Color(Lime)
             on_release: app.root.changeScreen(self.text.lower())
+

@@ -65,7 +65,7 @@ class MainScreen(BoxLayout):
             usertransact = db.select('transaction', **{'userID':barcode, 'date(datetime)'
             :datetime.now().date()})
             print(usertransact.rowcount)
-            if usertransact.rowcount < 2:
+            if usertransact.rowcount < 2 or True:
                 self.changeScreen('confirm')
             else:
                 content = BoxLayout(orientation="vertical")
@@ -225,8 +225,8 @@ class MainScreen(BoxLayout):
         self.popup = Popup(title="Is Biogesic the medicine you need?", size_hint=(None, None),
                            size=(500, 200), auto_dismiss=False, content=content)
         servo1 = lambda x:self.transaction('Biogesic')
-        yes_btn = Button(text="Yes", on_release = servo1)
-        no_btn = Button(text="No", on_press=self.popup.dismiss)
+        yes_btn = Button(text="Yes", background_color=[0,204,0,0.7], color=[0,0,0,1],on_release = servo1)
+        no_btn = Button(text="No", background_color=[153,0,0,0.7], color=[0,0,0,1], on_press=self.popup.dismiss)
         content.add_widget(yes_btn)
         content.add_widget(no_btn)
         self.popup.open()
@@ -236,8 +236,8 @@ class MainScreen(BoxLayout):
         self.popup = Popup(title="Is Buscopan the medicine you need?", size_hint=(None, None),
                            size=(500, 200), auto_dismiss=False, content=content)
         servo2 = lambda x:self.transaction('Buscopan')
-        yes_btn = Button(text="Yes", on_release = servo2)
-        no_btn = Button(text="No", on_press=self.popup.dismiss)
+        yes_btn = Button(text="Yes", background_color=[0,204,0,0.7], color=[0,0,0,1], on_release = servo2)
+        no_btn = Button(text="No", background_color=[153,0,0,0.7], color=[0,0,0,1], on_press=self.popup.dismiss)
         content.add_widget(yes_btn)
         content.add_widget(no_btn)
         self.popup.open()
@@ -247,8 +247,8 @@ class MainScreen(BoxLayout):
         self.popup = Popup(title="Is Decolgen No-Drowse the medicine you need?", size_hint=(None, None),
                            size=(500, 200), auto_dismiss=False, content=content)
         servo3 = lambda x:self.transaction('DecolgenND')
-        yes_btn = Button(text="Yes", on_release = servo3)
-        no_btn = Button(text="No", on_press=self.popup.dismiss)
+        yes_btn = Button(text="Yes", background_color=[0,204,0,0.7], color=[0,0,0,1], on_release = servo3)
+        no_btn = Button(text="No", background_color=[153,0,0,0.7], color=[0,0,0,1], on_press=self.popup.dismiss)
         content.add_widget(yes_btn)
         content.add_widget(no_btn)
         self.popup.open()
@@ -258,8 +258,8 @@ class MainScreen(BoxLayout):
         self.popup = Popup(title="Is Dolfenal the medicine you need?", size_hint=(None, None),
                            size=(500, 200), auto_dismiss=False, content=content)
         servo4 = lambda x:self.transaction('Dolfenal')
-        yes_btn = Button(text="Yes", on_release = servo4)
-        no_btn = Button(text="No", on_press=self.popup.dismiss)
+        yes_btn = Button(text="Yes", background_color=[0,204,0,0.7], color=[0,0,0,1], on_release = servo4)
+        no_btn = Button(text="No", background_color=[153,0,0,0.7], color=[0,0,0,1], on_press=self.popup.dismiss)
         content.add_widget(yes_btn)
         content.add_widget(no_btn)
         self.popup.open()
@@ -269,8 +269,8 @@ class MainScreen(BoxLayout):
         self.popup = Popup(title="Is Solmux the medicine you need?", size_hint=(None, None),
                            size=(500, 200), auto_dismiss=False, content=content)
         servo5 = lambda x:self.transaction('Solmux')
-        yes_btn = Button(text="Yes", on_release = servo5)
-        no_btn = Button(text="No", on_press=self.popup.dismiss)
+        yes_btn = Button(text="Yes", background_color=[0,204,0,0.7], color=[0,0,0,1], on_release = servo5)
+        no_btn = Button(text="No", background_color=[153,0,0,0.7], color=[0,0,0,1], on_press=self.popup.dismiss)
         content.add_widget(yes_btn)
         content.add_widget(no_btn)
         self.popup.open()
