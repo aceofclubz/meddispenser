@@ -70,7 +70,7 @@ class MainScreen(BoxLayout):
             else:
                 content = BoxLayout(orientation="vertical")
                 self.pop = Popup(title='Error',size=(500, 200), auto_dismiss=False, content=content)
-                ok_btn = Button(text="OK", on_press=self.pop.dismiss, size_hint_y=.3, font_size='20dp')
+                ok_btn = Button(text="OK", on_press=self.pop.dismiss, size_hint_y=.3, font_size='40dp')
                 content.add_widget(Label(text="You have reached the daily limit of withdrawing medicine.", size_hint_y=.7,font_size='30dp'))
                 content.add_widget(ok_btn)
                 self.pop.open()
@@ -78,7 +78,7 @@ class MainScreen(BoxLayout):
         else:
             content = BoxLayout(orientation="vertical")
             self.pop = Popup(title='Error',size=(500, 200), auto_dismiss=False, content=content)
-            ok_btn = Button(text="OK", on_press=self.pop.dismiss, size_hint_y=.3, font_size='20dp')
+            ok_btn = Button(text="OK", on_press=self.pop.dismiss, size_hint_y=.3, font_size='40dp')
             content.add_widget(Label(text="Invalid Login", size_hint_y=.7,font_size='75dp'))
             content.add_widget(ok_btn)
             self.pop.open()
@@ -91,8 +91,8 @@ class MainScreen(BoxLayout):
         else:
             content = BoxLayout(orientation="vertical")
             self.pop = Popup(title='Error',size=(500, 200), auto_dismiss=False, content=content)
-            ok_btn = Button(text="OK", on_press=self.pop.dismiss, size_hint_y=.3, font_size='20dp')
-            content.add_widget(Label(text="Invalid Login", size_hint_y=.7,font_size='30dp'))
+            ok_btn = Button(text="OK", on_press=self.pop.dismiss, size_hint_y=.3, font_size='40dp')
+            content.add_widget(Label(text="Invalid Login", size_hint_y=.7,font_size='75dp'))
             content.add_widget(ok_btn)
             self.pop.open()
 
