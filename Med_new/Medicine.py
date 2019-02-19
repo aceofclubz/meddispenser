@@ -70,7 +70,7 @@ class MainScreen(BoxLayout):
             else:
                 content = BoxLayout(orientation="vertical")
                 self.pop = Popup(title='Error',size=(500, 200), auto_dismiss=False, content=content)
-                ok_btn = Button(text="OK", on_press=self.pop.dismiss, size_hint_y=.3, font_size='20dp')
+                ok_btn = Button(text="OK", on_press=self.pop.dismiss, size_hint_y=.3, font_size='40dp')
                 content.add_widget(Label(text="You have reached the daily limit of withdrawing medicine.", size_hint_y=.7,font_size='30dp'))
                 content.add_widget(ok_btn)
                 self.pop.open()
@@ -78,7 +78,7 @@ class MainScreen(BoxLayout):
         else:
             content = BoxLayout(orientation="vertical")
             self.pop = Popup(title='Error',size=(500, 200), auto_dismiss=False, content=content)
-            ok_btn = Button(text="OK", on_press=self.pop.dismiss, size_hint_y=.3, font_size='20dp')
+            ok_btn = Button(text="OK", on_press=self.pop.dismiss, size_hint_y=.3, font_size='40dp')
             content.add_widget(Label(text="Invalid Login", size_hint_y=.7,font_size='75dp'))
             content.add_widget(ok_btn)
             self.pop.open()
@@ -91,8 +91,8 @@ class MainScreen(BoxLayout):
         else:
             content = BoxLayout(orientation="vertical")
             self.pop = Popup(title='Error',size=(500, 200), auto_dismiss=False, content=content)
-            ok_btn = Button(text="OK", on_press=self.pop.dismiss, size_hint_y=.3, font_size='20dp')
-            content.add_widget(Label(text="Invalid Login", size_hint_y=.7,font_size='30dp'))
+            ok_btn = Button(text="OK", on_press=self.pop.dismiss, size_hint_y=.3, font_size='40dp')
+            content.add_widget(Label(text="Invalid Login", size_hint_y=.7,font_size='75dp'))
             content.add_widget(ok_btn)
             self.pop.open()
 
@@ -184,7 +184,7 @@ class MainScreen(BoxLayout):
             sms.send_msg(text)
 
         #pindelay is a dictionary which contains {'medName':(pin, delay)}
-        pindelay = {'Dolfenal':(4, 1), 'Solmux':(5, 1), 'Buscopan':(6, 1), 'DecolgenND':(13, 1), 'Biogesic': (26, 1)}
+        pindelay = {'Dolfenal':(4, 1), 'Solmux':(5, 1), 'Buscopan':(6, 1.5), 'DecolgenND':(13, 1.5), 'Biogesic': (26, 1)}
         self.dispense(pindelay[medName])
 
 
@@ -225,8 +225,8 @@ class MainScreen(BoxLayout):
         self.popup = Popup(title="Is Biogesic the medicine you need?", size_hint=(None, None),
                            size=(500, 200), auto_dismiss=False, content=content)
         servo1 = lambda x:self.transaction('Biogesic')
-        yes_btn = Button(text="Yes", on_release = servo1)
-        no_btn = Button(text="No", on_press=self.popup.dismiss)
+        yes_btn = Button(text="Yes", background_color=[0,204,0,0.7], color=[0,0,0,1],on_release = servo1)
+        no_btn = Button(text="No", background_color=[153,0,0,0.7], color=[0,0,0,1], on_press=self.popup.dismiss)
         content.add_widget(yes_btn)
         content.add_widget(no_btn)
         self.popup.open()
@@ -236,8 +236,8 @@ class MainScreen(BoxLayout):
         self.popup = Popup(title="Is Buscopan the medicine you need?", size_hint=(None, None),
                            size=(500, 200), auto_dismiss=False, content=content)
         servo2 = lambda x:self.transaction('Buscopan')
-        yes_btn = Button(text="Yes", on_release = servo2)
-        no_btn = Button(text="No", on_press=self.popup.dismiss)
+        yes_btn = Button(text="Yes", background_color=[0,204,0,0.7], color=[0,0,0,1], on_release = servo2)
+        no_btn = Button(text="No", background_color=[153,0,0,0.7], color=[0,0,0,1], on_press=self.popup.dismiss)
         content.add_widget(yes_btn)
         content.add_widget(no_btn)
         self.popup.open()
@@ -247,8 +247,8 @@ class MainScreen(BoxLayout):
         self.popup = Popup(title="Is Decolgen No-Drowse the medicine you need?", size_hint=(None, None),
                            size=(500, 200), auto_dismiss=False, content=content)
         servo3 = lambda x:self.transaction('DecolgenND')
-        yes_btn = Button(text="Yes", on_release = servo3)
-        no_btn = Button(text="No", on_press=self.popup.dismiss)
+        yes_btn = Button(text="Yes", background_color=[0,204,0,0.7], color=[0,0,0,1], on_release = servo3)
+        no_btn = Button(text="No", background_color=[153,0,0,0.7], color=[0,0,0,1], on_press=self.popup.dismiss)
         content.add_widget(yes_btn)
         content.add_widget(no_btn)
         self.popup.open()
@@ -258,8 +258,8 @@ class MainScreen(BoxLayout):
         self.popup = Popup(title="Is Dolfenal the medicine you need?", size_hint=(None, None),
                            size=(500, 200), auto_dismiss=False, content=content)
         servo4 = lambda x:self.transaction('Dolfenal')
-        yes_btn = Button(text="Yes", on_release = servo4)
-        no_btn = Button(text="No", on_press=self.popup.dismiss)
+        yes_btn = Button(text="Yes", background_color=[0,204,0,0.7], color=[0,0,0,1], on_release = servo4)
+        no_btn = Button(text="No", background_color=[153,0,0,0.7], color=[0,0,0,1], on_press=self.popup.dismiss)
         content.add_widget(yes_btn)
         content.add_widget(no_btn)
         self.popup.open()
@@ -269,8 +269,8 @@ class MainScreen(BoxLayout):
         self.popup = Popup(title="Is Solmux the medicine you need?", size_hint=(None, None),
                            size=(500, 200), auto_dismiss=False, content=content)
         servo5 = lambda x:self.transaction('Solmux')
-        yes_btn = Button(text="Yes", on_release = servo5)
-        no_btn = Button(text="No", on_press=self.popup.dismiss)
+        yes_btn = Button(text="Yes", background_color=[0,204,0,0.7], color=[0,0,0,1], on_release = servo5)
+        no_btn = Button(text="No", background_color=[153,0,0,0.7], color=[0,0,0,1], on_press=self.popup.dismiss)
         content.add_widget(yes_btn)
         content.add_widget(no_btn)
         self.popup.open()
@@ -308,7 +308,7 @@ class MedicineApp(App):
     def __init__(self, **kwargs):
         super(MedicineApp, self).__init__(**kwargs)
         x=datetime.today()
-        y=x.replace(day=x.day, hour=20, minute=36, second=0, microsecond=0)
+        y=x.replace(day=x.day, hour=15, minute=40, second=0, microsecond=0)
         delta_t=y-x
         secs=delta_t.seconds+1
         t = Timer(secs, self.mail)
