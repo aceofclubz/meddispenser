@@ -9,3 +9,9 @@ class AdminForm(forms.ModelForm):
         widgets = {
             'adminpass': forms.PasswordInput(),
         }
+
+
+class UserForm(forms.ModelForm):
+    class Meta:
+        model = User
+        exclude = ['']

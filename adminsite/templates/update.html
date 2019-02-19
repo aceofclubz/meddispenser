@@ -1,0 +1,21 @@
+{% extends 'basic.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block innercontent %}
+    <div class="container">
+        <div class="row">
+            <form method="post" action="{% url 'update' form_u.instance.uid %}">
+                {% csrf_token %}
+                {{ form_u|crispy }}
+                <input type="submit" value="Update User">
+            </form>
+        </div>
+        <div class="row">
+            <form method="post" action="{% url 'update' form_a.instance.adminuser 1 %}">
+                {% csrf_token %}
+                {{ form_a|crispy }}
+                <input type="submit" value="Update Admin">
+            </form>
+        </div>
+    </div>
+{% endblock %}
