@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import JsonResponse, HttpResponse
+from django.core.exceptions import ObjectDoesNotExist
 from .models import *
 from .forms import *
 
@@ -69,8 +70,8 @@ def transact_med(request, med_id):
     context['transactions'] = Transaction.objects.filter(medid=med_id).order_by('-datetime')
     return render(request, 'transaction.html', context)
 
+
 def medicine(request):
     context = {}
     context['medicines'] = Medicine.objects.all()
     return render(request, 'medicine.html', context)
-

@@ -28,8 +28,10 @@ class Wrapper:
                 query = query + str(x[i]) + " = \'" + str(y[i]) + "\'"
                 if i < len(x) - 1:
                     query = query + " AND "
-        else:
+        elif len(x) == 1:
             query = "SELECT * FROM " + tablename + " WHERE " + str(x[0]) + " = \'" + str(y[0]) + "\'"
+        else:
+            query = "SELECT * FROM " + tablename
         print(query)
         self.cursor.execute(query)
         return self.cursor

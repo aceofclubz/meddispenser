@@ -122,6 +122,7 @@
 
         #minimum of 2% of the root width and root height of the text
         spacing: min(root.width, root.height) *.02
+        on_pre_enter: app.root.stopper()
 
 
         WrappedLabel:
