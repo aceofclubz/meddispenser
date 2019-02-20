@@ -11,7 +11,6 @@ def send_msg(text):
 
     message = client.messages.create(body=text,
                                      from_=twilio_no,
-                                     to="+639286382077",
-                                     "+639772452807"
+                                     to="+639286382077" "+639772452907",
                                      )
 
