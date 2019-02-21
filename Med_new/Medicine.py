@@ -356,7 +356,7 @@ class MedicineApp(App):
 
     def mail(self):
         medicines = db.select('medicine')
-        list_of_med = 'Please be informed that the number of medicines are as follows: \n'
+        list_of_med = 'Subject: Medicine Dispenser Inventory\n\n'
         for medicine in medicines:
             list_of_med += medicine['medName'] + ", has " + str(medicine['count']) + ' pieces remaining.\n'
         gmail_user = 'smartdispenser0@gmail.com'
@@ -367,8 +367,8 @@ class MedicineApp(App):
         server.starttls()
         server.login(gmail_user, gmail_pwd)
 
-        message = 'Please be informed that the number of medicines are as follows: \n' + list_of_med
-        server.sendmail(gmail_user, gmail_send, message)
+        print(list_of_med)
+        server.sendmail(gmail_user, gmail_send, list_of_med)
         server.quit()
 
 
