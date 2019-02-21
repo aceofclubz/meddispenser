@@ -57,6 +57,7 @@
         BarcodeScreen:
             id: barcode_screen
             name: "barcode_screen"
+            on_enter: app.root.stopper()
 
         AdminScreen:
             id: admin_screen
@@ -122,7 +123,6 @@
 
         #minimum of 2% of the root width and root height of the text
         spacing: min(root.width, root.height) *.02
-        on_pre_enter: app.root.stopper()
 
 
         WrappedLabel:
@@ -841,7 +841,7 @@
             font_size: 25
             color: Color(Light)
             background_color: Color(Torquiose)
-            on_release: app.root.conpop1()
+            on_release: app.root.cp_block("Biogesic", app.root.conpop1)
 
         Button:
             text: "Back to Main Screen"
@@ -886,7 +886,7 @@
             font_size: 25
             background_color: Color(HPink)
             color: Color(Green)
-            on_release: app.root.conpop2()
+            on_release: app.root.cp_block("Buscopan", app.root.conpop2)
 
         Button:
             text: "Back to Main Screen"
@@ -932,7 +932,7 @@
             font_size: 25
             background_color: Color(Yellow)
             color: Color(Gold)
-            on_release: app.root.conpop3()
+            on_release: app.root.cp_block("DecolgenND", app.root.conpop3)
 
         Button:
             text: "Back to Main Screen"
@@ -977,7 +977,7 @@
             font_size: 25
             background_color: Color(Fushia)
             color: Color(LGreen)
-            on_release: app.root.conpop4()
+            on_release: app.root.cp_block("Dolfenal", app.root.conpop4)
 
         Button:
             text: "Back to Main Screen"
@@ -1022,7 +1022,7 @@
             font_size: 25
             background_color: Color(Blue)
             color: Color(Lime)
-            on_release: app.root.conpop5()
+            on_release: app.root.cp_block("Solmux", app.root.conpop5)
 
         Button:
             text: "Back to Main Screen"

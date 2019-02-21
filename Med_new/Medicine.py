@@ -95,12 +95,12 @@ class MainScreen(BoxLayout):
             # code for no laman here
             content = BoxLayout(orientation="vertical")
             self.pop = Popup(title='Error', size=(500, 200), auto_dismiss=False, content=content)
-            ok_btn = Button(text="Admin login", on_press=self.changeScreen("admin login"), size_hint_y=.3,
+            ok_btn = Button(text="OK", on_press=self.pop.dismiss, size_hint_y=.3,
                             font_size='40dp')
             content.add_widget(
-                Label(text="The dispenser has no medicine, please go to the nearest clinic", size_hint_y=.7,
-                      font_size='75dp'))
-            content.add_widget(ok_btn)
+                Label(text="The dispenser has no medicine.\n Please go to the nearest clinic", size_hint_y=.7,
+                      font_size='55dp'))
+           # content.add_widget(ok_btn)
             self.pop.open()
 
     def admin(self, user, passwd):
@@ -202,10 +202,29 @@ class MainScreen(BoxLayout):
         if medCount <= 5:
             text = medName + " has " + str(medCount) + " pieces remaining, please refill."
             sms.send_msg(text)
-        elif medCount > 0:
-            self.dispense(pindelay[medName])
+        self.dispense(pindelay[medName])
+
+    def cp_block(self, medName, popper):
+        result = db.select('medicine', **{'medName': medName})
+        x = 0
+        for i in result:
+            if x == 0:
+                value = i
+                x += 1
+        medID = value['mid']
+        medCount = int(value['count'])
+        if medCount > 0:
+            popper()
         else:
-            pass
+            """
+            pag himo dire ug pop up na error shit
+            """
+            content = BoxLayout(orientation="vertical")
+            self.pop = Popup(title='Error', size=(500, 200), auto_dismiss=False, content=content)
+            ok_btn = Button(text="OK", on_press=self.pop.dismiss, size_hint_y=.3, font_size='40dp')
+            content.add_widget(Label(text="Medicine out of stock", size_hint_y=.7, font_size='75dp'))
+            content.add_widget(ok_btn)
+            self.pop.open()
 
     def pop1(self):
         self.pop = Popup(title='Information', content=Image(source='biogesic.png'),
@@ -337,9 +356,9 @@ class MedicineApp(App):
 
     def mail(self):
         medicines = db.select('medicine')
-        list_of_med = ''
+        list_of_med = 'Please be informed that the number of medicines are as follows: \n'
         for medicine in medicines:
-            list_of_med += medicine['medName'] + ", has " + int(medicine['count']) + ' pieces remaining.\n'
+            list_of_med += medicine['medName'] + ", has " + str(medicine['count']) + ' pieces remaining.\n'
         gmail_user = 'smartdispenser0@gmail.com'
         gmail_pwd = 'abcd@12345_678'
         gmail_send = 'smartdispenser0@gmail.com'
